@@ -29,13 +29,12 @@
 
     <main class="container mx-auto px-6 py-8" id="dashboard-content" style="display: none;">
         
-        <!-- Área de Filtros Atualizada -->
+        <!-- Área de Filtros -->
         <section class="bg-white p-4 rounded-xl shadow-sm mb-6 border border-slate-200 flex flex-wrap gap-4 items-end">
             <div>
                 <label class="block text-xs font-semibold text-slate-500 mb-1">Ano</label>
                 <select id="filter-ano" class="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2">
                     <option value="ALL">Todos</option>
-                    <!-- Opções preenchidas via JS dinamicamente -->
                 </select>
             </div>
             <div>
@@ -61,14 +60,14 @@
         <!-- KPI Cards -->
         <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-blue-500">
-                <h3 class="text-slate-500 text-sm font-semibold mb-1">Total de Atendimentos</h3>
+                <h3 class="text-slate-500 text-sm font-semibold mb-1">Pessoas Atendidas</h3>
                 <p class="text-3xl font-bold text-slate-800" id="kpi-total">0</p>
-                <p class="text-xs text-slate-400 mt-2">Volume fragmentado analisado</p>
+                <p class="text-xs text-slate-400 mt-2">Registros únicos no formulário (linhas)</p>
             </div>
             <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-emerald-500">
-                <h3 class="text-slate-500 text-sm font-semibold mb-1">Total de MEIs</h3>
+                <h3 class="text-slate-500 text-sm font-semibold mb-1">Total de Contribuintes MEI</h3>
                 <p class="text-3xl font-bold text-slate-800" id="kpi-mei">0</p>
-                <p class="text-xs text-slate-400 mt-2">Abertura e DASN somados</p>
+                <p class="text-xs text-slate-400 mt-2">Pessoas que buscaram Abertura ou DASN</p>
             </div>
             <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-purple-500">
                 <h3 class="text-slate-500 text-sm font-semibold mb-1">Folhas Impressas</h3>
@@ -80,7 +79,7 @@
         <!-- Charts Area -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 lg:col-span-2">
-                <h3 class="text-md font-bold text-slate-700 mb-4">Volume por Categoria Principal</h3>
+                <h3 class="text-md font-bold text-slate-700 mb-4">Serviços Prestados por Categoria</h3>
                 <div class="relative h-72">
                     <canvas id="chartCategorias"></canvas>
                 </div>
@@ -127,7 +126,6 @@
         const dashboard = document.getElementById('dashboard-content');
         const emptyState = document.getElementById('empty-state');
         
-        // Elementos de Filtro
         const filterAno = document.getElementById('filter-ano');
         const filterConclusivo = document.getElementById('filter-conclusivo');
         const filterGenero = document.getElementById('filter-genero');
@@ -166,9 +164,10 @@
         function processarDadosBrutos(rawData) {
             globalAtendimentos = [];
             globalFolhas = 0;
-            let anosEncontrados = new Set(); // Conjunto para armazenar anos únicos
+            let anosEncontrados = new Set(); 
 
-            rawData.forEach(row => {
+            // Adicionado parâmetro 'index' para gerar um ID único por linha
+            rawData.forEach((row, index) => {
                 const dateKey = Object.keys(row).find(k => k.toLowerCase().includes('data de atendimento')) || 
                                 Object.keys(row).find(k => k.toLowerCase().includes('carimbo de data'));
                 const folhasKey = Object.keys(row).find(k => k.toLowerCase().includes('folhas'));
@@ -203,8 +202,10 @@
 
                 if (atendimentosFragmentados.length === 0) atendimentosFragmentados = ["Outros"];
 
+                // Aqui cada fragmento recebe o ID da linha original que o gerou
                 atendimentosFragmentados.forEach(atendimento => {
                     globalAtendimentos.push({
+                        idLinha: index, // Vínculo com a linha do CSV
                         dataStr: dateParsed,
                         ano: anoExtraido,
                         categoria: categorizar(atendimento),
@@ -214,7 +215,7 @@
                 });
             });
 
-            popularFiltroAnos(Array.from(anosEncontrados).sort((a, b) => b - a)); // Ordena do mais recente para o mais antigo
+            popularFiltroAnos(Array.from(anosEncontrados).sort((a, b) => b - a)); 
 
             emptyState.style.display = 'none';
             dashboard.style.display = 'block';
@@ -222,20 +223,17 @@
             updateDashboard();
         }
 
-        // --- Funções Auxiliares Adicionadas/Atualizadas ---
-        
         function extrairAno(dateStr) {
             if (dateStr === "Data Indefinida") return "Indefinido";
             const parts = dateStr.split(/[\/\-]/);
             if (parts.length >= 3) {
-                const year = parts[2].length === 4 ? parts[2] : parts[0]; // Captura YYYY dependendo do formato (DD/MM/YYYY ou YYYY-MM-DD)
+                const year = parts[2].length === 4 ? parts[2] : parts[0]; 
                 return year;
             }
             return "Indefinido";
         }
 
         function popularFiltroAnos(anos) {
-            // Mantém a opção "Todos" e adiciona os anos encontrados
             filterAno.innerHTML = '<option value="ALL">Todos</option>';
             anos.forEach(ano => {
                 const opt = document.createElement('option');
@@ -268,8 +266,6 @@
             return match ? match[1] : "Data Indefinida";
         }
 
-        // --- Atualização de Dashboard (Agora com Ano) ---
-
         function updateDashboard() {
             const filtroAnoVal = filterAno.value;
             const filtroConclusivoVal = filterConclusivo.value;
@@ -282,13 +278,15 @@
                 return matchAno && matchConclusivo && matchGenero;
             });
 
-            document.getElementById('kpi-total').innerText = dadosFiltrados.length;
+            // CORREÇÃO: Conta apenas os IDs de linhas únicos (Set remove as duplicatas)
+            const pessoasUnicas = new Set(dadosFiltrados.map(d => d.idLinha)).size;
+            document.getElementById('kpi-total').innerText = pessoasUnicas;
             
-            const totalMEI = dadosFiltrados.filter(d => d.categoria === 'Abertura de MEI' || d.categoria === 'DASN MEI').length;
-            document.getElementById('kpi-mei').innerText = totalMEI;
+            // CORREÇÃO: Conta IDs únicos para MEIs também, evitando duplicar caso a pessoa faça Abertura e DASN no mesmo dia
+            const arrayMEIs = dadosFiltrados.filter(d => d.categoria === 'Abertura de MEI' || d.categoria === 'DASN MEI');
+            const meisUnicos = new Set(arrayMEIs.map(d => d.idLinha)).size;
+            document.getElementById('kpi-mei').innerText = meisUnicos;
             
-            // Nota: Folhas impressas continuam sendo o somatório global para evitar distorção no split. 
-            // Se quiser que filtre as folhas, exigirá alterar a lógica na raiz.
             document.getElementById('kpi-folhas').innerText = globalFolhas; 
 
             renderChartCategorias(dadosFiltrados);
@@ -324,6 +322,7 @@
         }
 
         function renderChartGeneroIRPF(dados) {
+            // No gráfico de pizza a gente mantém a contagem de serviços de IRPF normal
             const dadosIRPF = dados.filter(d => d.categoria === 'Imposto de Renda');
             let masc = 0, fem = 0;
 
@@ -358,10 +357,20 @@
 
         function renderChartEvolucao(dados) {
             const contagemData = {};
+            
+            // Para a linha do tempo, também queremos pessoas únicas por dia em vez de volume de serviço
+            // Então vamos rastrear os IDs únicos que passaram naquele dia
+            const datasComIds = {};
+
             dados.forEach(d => {
                 if(d.dataStr === "Data Indefinida") return;
-                contagemData[d.dataStr] = (contagemData[d.dataStr] || 0) + 1;
+                if(!datasComIds[d.dataStr]) datasComIds[d.dataStr] = new Set();
+                datasComIds[d.dataStr].add(d.idLinha);
             });
+
+            for (const dataStr in datasComIds) {
+                contagemData[dataStr] = datasComIds[dataStr].size;
+            }
 
             const datasOrdenadas = Object.keys(contagemData).sort((a, b) => {
                 const [d1, m1, y1] = a.split(/[\/\-]/);
@@ -379,7 +388,7 @@
                 data: {
                     labels: datasOrdenadas,
                     datasets: [{
-                        label: 'Atendimentos por Dia',
+                        label: 'Pessoas Atendidas por Dia',
                         data: valores,
                         borderColor: '#10b981',
                         backgroundColor: 'rgba(16, 185, 129, 0.1)',
