@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard NAF - Analytics Center</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen">
+
+    <header class="bg-blue-900 text-white shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold">Dashboard Analítico NAF</h1>
+                <p class="text-sm text-blue-200">Processamento local seguro (Client-Side) • Conformidade LGPD</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <label for="csv-upload" class="cursor-pointer bg-blue-600 hover:bg-blue-500 transition px-4 py-2 rounded-md font-medium text-sm shadow-sm flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    Carregar CSV
+                </label>
+                <input id="csv-upload" type="file" accept=".csv" class="hidden" />
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8" id="dashboard-content" style="display: none;">
+        
+        <!-- Área de Filtros Atualizada -->
+        <section class="bg-white p-4 rounded-xl shadow-sm mb-6 border border-slate-200 flex flex-wrap gap-4 items-end">
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1">Ano</label>
+                <select id="filter-ano" class="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2">
+                    <option value="ALL">Todos</option>
+                    <!-- Opções preenchidas via JS dinamicamente -->
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1">Status de Conclusão</label>
+                <select id="filter-conclusivo" class="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2">
+                    <option value="ALL">Todos</option>
+                    <option value="SIM">Conclusivo (Sim)</option>
+                    <option value="NÃO">Não Conclusivo (Não)</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1">Gênero</label>
+                <select id="filter-genero" class="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2">
+                    <option value="ALL">Todos</option>
+                    <option value="MASCULINO">Masculino</option>
+                    <option value="FEMININO">Feminino</option>
+                </select>
+            </div>
+            <div class="flex-grow"></div>
+            <button id="btn-reset" class="text-sm text-slate-500 hover:text-blue-600 underline">Limpar Filtros</button>
+        </section>
+
+        <!-- KPI Cards -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-blue-500">
+                <h3 class="text-slate-500 text-sm font-semibold mb-1">Total de Atendimentos</h3>
+                <p class="text-3xl font-bold text-slate-800" id="kpi-total">0</p>
+                <p class="text-xs text-slate-400 mt-2">Volume fragmentado analisado</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-emerald-500">
+                <h3 class="text-slate-500 text-sm font-semibold mb-1">Total de MEIs</h3>
+                <p class="text-3xl font-bold text-slate-800" id="kpi-mei">0</p>
+                <p class="text-xs text-slate-400 mt-2">Abertura e DASN somados</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-purple-500">
+                <h3 class="text-slate-500 text-sm font-semibold mb-1">Folhas Impressas</h3>
+                <p class="text-3xl font-bold text-slate-800" id="kpi-folhas">0</p>
+                <p class="text-xs text-slate-400 mt-2">Soma total de impressões</p>
+            </div>
+        </section>
+
+        <!-- Charts Area -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 lg:col-span-2">
+                <h3 class="text-md font-bold text-slate-700 mb-4">Volume por Categoria Principal</h3>
+                <div class="relative h-72">
+                    <canvas id="chartCategorias"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <h3 class="text-md font-bold text-slate-700 mb-1">Desigualdade de Gênero</h3>
+                <p class="text-xs text-slate-400 mb-4">Filtro Exclusivo: Imposto de Renda</p>
+                <div class="relative h-64 flex justify-center">
+                    <canvas id="chartGenero"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 lg:col-span-3">
+                <h3 class="text-md font-bold text-slate-700 mb-4">Evolução de Atendimentos</h3>
+                <div class="relative h-80">
+                    <canvas id="chartEvolucao"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="empty-state" class="flex flex-col items-center justify-center mt-32">
+        <svg class="w-24 h-24 text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        <h2 class="text-xl font-semibold text-slate-600">Nenhum dado processado</h2>
+        <p class="text-slate-400 text-sm mt-2">Faça o upload do seu CSV de respostas do formulário para iniciar.</p>
+    </div>
+
+    <script>
+        const categoriasDicionario = {
+            "DASN MEI": ["DASN", "DECLARAÇÃO ANUAL", "FATURAMENTO MEI"],
+            "Parcelamento": ["PARCELAMENTO", "PARCELA", "DIVIDIR", "NEGOCIAÇÃO"],
+            "Imposto de Renda": ["IRPF", "DIRPF", "AJUSTE ANUAL", "DECLARAÇÃO DE AJUSTE", "RENDIMENTO", "RESTITUIÇÃO", "IR"],
+            "Emissão de DARF": ["DARF", "GUIA", "PAGAMENTO"],
+            "Abertura de MEI": ["ABERTURA", "ABRIR", "FORMALIZAÇÃO", "MEI", "ABERTURA DE MEI"],
+            "Outros": []
+        };
+
+        let globalAtendimentos = [];
+        let globalFolhas = 0; 
+        let chartInstances = {};
+
+        const fileInput = document.getElementById('csv-upload');
+        const dashboard = document.getElementById('dashboard-content');
+        const emptyState = document.getElementById('empty-state');
+        
+        // Elementos de Filtro
+        const filterAno = document.getElementById('filter-ano');
+        const filterConclusivo = document.getElementById('filter-conclusivo');
+        const filterGenero = document.getElementById('filter-genero');
+        const btnReset = document.getElementById('btn-reset');
+
+        fileInput.addEventListener('change', handleFileUpload);
+        filterAno.addEventListener('change', updateDashboard);
+        filterConclusivo.addEventListener('change', updateDashboard);
+        filterGenero.addEventListener('change', updateDashboard);
+        
+        btnReset.addEventListener('click', () => {
+            filterAno.value = "ALL";
+            filterConclusivo.value = "ALL";
+            filterGenero.value = "ALL";
+            updateDashboard();
+        });
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            Papa.parse(file, {
+                header: true,
+                skipEmptyLines: true,
+                delimiter: ";", 
+                complete: function(results) {
+                    processarDadosBrutos(results.data);
+                },
+                error: function(err) {
+                    alert("Erro ao processar o CSV. Verifique a formatação do arquivo.");
+                    console.error(err);
+                }
+            });
+        }
+
+        function processarDadosBrutos(rawData) {
+            globalAtendimentos = [];
+            globalFolhas = 0;
+            let anosEncontrados = new Set(); // Conjunto para armazenar anos únicos
+
+            rawData.forEach(row => {
+                const dateKey = Object.keys(row).find(k => k.toLowerCase().includes('data de atendimento')) || 
+                                Object.keys(row).find(k => k.toLowerCase().includes('carimbo de data'));
+                const folhasKey = Object.keys(row).find(k => k.toLowerCase().includes('folhas'));
+                const tipoKey = Object.keys(row).find(k => k.toLowerCase().includes('tipo de atendimento') && !k.toLowerCase().includes('usuário'));
+                const outroKey = Object.keys(row).find(k => k.toLowerCase().includes('respondeu outro'));
+                const sexoKey = Object.keys(row).find(k => k.toLowerCase().includes('sexo'));
+                const conclusivoKey = Object.keys(row).find(k => k.toLowerCase().includes('conclusivo'));
+
+                const rawDate = (row[dateKey] || "").trim();
+                if (!rawDate) return; 
+
+                const dateParsed = extractDateString(rawDate);
+                const anoExtraido = extrairAno(dateParsed);
+                
+                if (anoExtraido !== "Indefinido") {
+                    anosEncontrados.add(anoExtraido);
+                }
+
+                const numFolhas = parseInt((row[folhasKey] || "0").replace(/\D/g, '')) || 0;
+                globalFolhas += numFolhas;
+
+                const tiposAtendimentoStr = (row[tipoKey] || "").trim();
+                const outroAtendimentoStr = (row[outroKey] || "").trim();
+                
+                const combinedTypes = [tiposAtendimentoStr, outroAtendimentoStr]
+                    .filter(t => t !== "")
+                    .join(",");
+                
+                let atendimentosFragmentados = combinedTypes.split(",")
+                    .map(t => t.trim())
+                    .filter(t => t !== "");
+
+                if (atendimentosFragmentados.length === 0) atendimentosFragmentados = ["Outros"];
+
+                atendimentosFragmentados.forEach(atendimento => {
+                    globalAtendimentos.push({
+                        dataStr: dateParsed,
+                        ano: anoExtraido,
+                        categoria: categorizar(atendimento),
+                        sexo: normalizarStr(row[sexoKey]),
+                        conclusivo: normalizarStr(row[conclusivoKey])
+                    });
+                });
+            });
+
+            popularFiltroAnos(Array.from(anosEncontrados).sort((a, b) => b - a)); // Ordena do mais recente para o mais antigo
+
+            emptyState.style.display = 'none';
+            dashboard.style.display = 'block';
+
+            updateDashboard();
+        }
+
+        // --- Funções Auxiliares Adicionadas/Atualizadas ---
+        
+        function extrairAno(dateStr) {
+            if (dateStr === "Data Indefinida") return "Indefinido";
+            const parts = dateStr.split(/[\/\-]/);
+            if (parts.length >= 3) {
+                const year = parts[2].length === 4 ? parts[2] : parts[0]; // Captura YYYY dependendo do formato (DD/MM/YYYY ou YYYY-MM-DD)
+                return year;
+            }
+            return "Indefinido";
+        }
+
+        function popularFiltroAnos(anos) {
+            // Mantém a opção "Todos" e adiciona os anos encontrados
+            filterAno.innerHTML = '<option value="ALL">Todos</option>';
+            anos.forEach(ano => {
+                const opt = document.createElement('option');
+                opt.value = ano;
+                opt.textContent = ano;
+                filterAno.appendChild(opt);
+            });
+        }
+
+        function categorizar(texto) {
+            const textoNorm = normalizarStr(texto);
+            if (!textoNorm) return "Outros";
+
+            for (const [cat, chaves] of Object.entries(categoriasDicionario)) {
+                if (cat === "Outros") continue;
+                for (const chave of chaves) {
+                    if (textoNorm.includes(chave)) return cat;
+                }
+            }
+            return "Outros";
+        }
+
+        function normalizarStr(str) {
+            if (!str) return "";
+            return String(str).toUpperCase().trim();
+        }
+
+        function extractDateString(rawDateStr) {
+            const match = rawDateStr.match(/(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})/);
+            return match ? match[1] : "Data Indefinida";
+        }
+
+        // --- Atualização de Dashboard (Agora com Ano) ---
+
+        function updateDashboard() {
+            const filtroAnoVal = filterAno.value;
+            const filtroConclusivoVal = filterConclusivo.value;
+            const filtroGeneroVal = filterGenero.value;
+
+            const dadosFiltrados = globalAtendimentos.filter(d => {
+                const matchAno = filtroAnoVal === "ALL" || (d.ano === filtroAnoVal);
+                const matchConclusivo = filtroConclusivoVal === "ALL" || (d.conclusivo.includes(filtroConclusivoVal));
+                const matchGenero = filtroGeneroVal === "ALL" || (d.sexo.includes(filtroGeneroVal));
+                return matchAno && matchConclusivo && matchGenero;
+            });
+
+            document.getElementById('kpi-total').innerText = dadosFiltrados.length;
+            
+            const totalMEI = dadosFiltrados.filter(d => d.categoria === 'Abertura de MEI' || d.categoria === 'DASN MEI').length;
+            document.getElementById('kpi-mei').innerText = totalMEI;
+            
+            // Nota: Folhas impressas continuam sendo o somatório global para evitar distorção no split. 
+            // Se quiser que filtre as folhas, exigirá alterar a lógica na raiz.
+            document.getElementById('kpi-folhas').innerText = globalFolhas; 
+
+            renderChartCategorias(dadosFiltrados);
+            renderChartGeneroIRPF(dadosFiltrados);
+            renderChartEvolucao(dadosFiltrados);
+        }
+
+        function renderChartCategorias(dados) {
+            const contagem = Object.keys(categoriasDicionario).reduce((acc, curr) => ({...acc, [curr]: 0}), {});
+            dados.forEach(d => { if(contagem[d.categoria] !== undefined) contagem[d.categoria]++; });
+
+            const ctx = document.getElementById('chartCategorias').getContext('2d');
+            if(chartInstances.categorias) chartInstances.categorias.destroy();
+
+            chartInstances.categorias = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(contagem),
+                    datasets: [{
+                        label: 'Volume de Atendimentos',
+                        data: Object.values(contagem),
+                        backgroundColor: '#3b82f6', 
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                }
+            });
+        }
+
+        function renderChartGeneroIRPF(dados) {
+            const dadosIRPF = dados.filter(d => d.categoria === 'Imposto de Renda');
+            let masc = 0, fem = 0;
+
+            dadosIRPF.forEach(d => {
+                if(d.sexo.includes('MASCULINO')) masc++;
+                else if(d.sexo.includes('FEMININO')) fem++;
+            });
+
+            const ctx = document.getElementById('chartGenero').getContext('2d');
+            if(chartInstances.genero) chartInstances.genero.destroy();
+
+            chartInstances.genero = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Masculino', 'Feminino'],
+                    datasets: [{
+                        data: [masc, fem],
+                        backgroundColor: ['#3b82f6', '#ec4899'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        }
+
+        function renderChartEvolucao(dados) {
+            const contagemData = {};
+            dados.forEach(d => {
+                if(d.dataStr === "Data Indefinida") return;
+                contagemData[d.dataStr] = (contagemData[d.dataStr] || 0) + 1;
+            });
+
+            const datasOrdenadas = Object.keys(contagemData).sort((a, b) => {
+                const [d1, m1, y1] = a.split(/[\/\-]/);
+                const [d2, m2, y2] = b.split(/[\/\-]/);
+                return new Date(y1, m1-1, d1) - new Date(y2, m2-1, d2);
+            });
+
+            const valores = datasOrdenadas.map(d => contagemData[d]);
+
+            const ctx = document.getElementById('chartEvolucao').getContext('2d');
+            if(chartInstances.evolucao) chartInstances.evolucao.destroy();
+
+            chartInstances.evolucao = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: datasOrdenadas,
+                    datasets: [{
+                        label: 'Atendimentos por Dia',
+                        data: valores,
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true,
+                        pointBackgroundColor: '#10b981'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

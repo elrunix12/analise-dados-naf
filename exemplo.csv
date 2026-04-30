@@ -1,0 +1,101 @@
+Carimbo de data/hora;NOME DO CONTRIBUINTE;CPF;Data de Atendimento;Tipo de usuário dos serviços;O atendimento prestado foi conclusivo?;Tipo de Atendimento;Se respondeu outro, especifique aqui;Pontuação;Se houver, quantas folhas foram impressas:;IDADE;SEXO;MUNICÍPIO DE RESIDÊNCIA
+11/02/2023 14:11:00;Ana Costa 0;766.616.807-81;11/02/2023;Pessoa Física;Sim;Declaração do IRPF dos anos anteriores;;;3;27;FEMININO;Quatis
+29/06/2023 08:03:00;Juliana Ribeiro 1;147.846.964-88;29/06/2023;Pessoa Jurídica;Sim;Outro:;DASN MEI;;0;61;MASCULINO;Quatis
+20/11/2023 16:19:00;João Silva 2;420.605.340-48;20/11/2023;Pessoa Jurídica;Sim;Declaração do IRPF dos anos anteriores;;;0;75;FEMININO;Quatis
+04/09/2023 12:42:00;Marcos Rocha 3;753.765.596-90;04/09/2023;Pessoa Jurídica;Sim;Declaração de MEI;;;0;60;FEMININO;Porto Real
+29/06/2023 14:14:00;Lucas Mendes 4;427.333.397-89;29/06/2023;Pessoa Jurídica;Sim;Abertura de MEI;;;2;50;MASCULINO;Barra Mansa
+20/01/2023 13:59:00;Pedro Santos 5;117.702.661-24;20/01/2023;Pessoa Jurídica;Sim;Declaração Anual ou Retificadora e informação sobre IRPF, Emissão de DARF;;;0;31;MASCULINO;Porto Real
+04/01/2023 17:45:00;Juliana Ribeiro 6;203.970.345-80;04/01/2023;Pessoa Jurídica;Não;Declaração do IRPF dos anos anteriores;;;10;18;MASCULINO;Porto Real
+27/09/2023 11:47:00;João Silva 7;373.912.177-63;27/09/2023;Pessoa Jurídica;Sim;Outro:;Conferência e compensação de multa;;0;32;FEMININO;Quatis
+08/01/2023 10:26:00;Pedro Santos 8;488.337.614-76;08/01/2023;Pessoa Física;Não;Declaração Anual ou Retificadora e informação sobre IRPF;;;0;42;MASCULINO;Resende
+30/01/2023 12:42:00;Maria Oliveira 9;345.614.718-83;30/01/2023;Pessoa Jurídica;Sim;Compensação de Multa;;;0;27;FEMININO;Barra Mansa
+27/09/2023 09:07:00;Fernanda Alves 10;111.152.317-18;27/09/2023;Pessoa Jurídica;Sim;Declaração de MEI;;;2;38;MASCULINO;Quatis
+29/09/2023 11:23:00;Marcos Rocha 11;835.765.903-92;29/09/2023;Pessoa Jurídica;Sim;Compensação de Multa;;;0;36;MASCULINO;Resende
+24/08/2023 14:51:00;Lucas Mendes 12;541.406.626-89;24/08/2023;Pessoa Física;Sim;Outro:;irpf 2024;;0;31;FEMININO;Itatiaia
+22/04/2023 15:47:00;Maria Oliveira 13;647.918.390-38;22/04/2023;Pessoa Jurídica;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;0;55;FEMININO;Resende
+22/08/2023 09:04:00;Carlos Souza 14;587.373.286-21;22/08/2023;Pessoa Jurídica;Não;Outro:;;;2;42;MASCULINO;Volta Redonda
+03/12/2023 08:42:00;Ana Costa 15;185.191.597-69;03/12/2023;Pessoa Física;Sim;Declaração de MEI;;;0;73;MASCULINO;Resende
+10/06/2023 17:18:00;João Silva 16;112.282.141-56;10/06/2023;Pessoa Jurídica;Não;Declaração Anual ou Retificadora e informação sobre IRPF;;;0;55;FEMININO;Porto Real
+26/07/2023 15:33:00;Fernanda Alves 17;980.198.307-18;26/07/2023;Pessoa Jurídica;Sim;Outro:;Declaração Retificadora;;10;37;FEMININO;Resende
+29/04/2023 16:56:00;Lucas Mendes 18;481.204.808-28;29/04/2023;Pessoa Jurídica;Não;Compensação de Multa;;;0;57;FEMININO;Barra Mansa
+31/08/2023 17:38:00;João Silva 19;691.861.613-74;31/08/2023;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF, Outro:;Conferência e compensação de multa;;1;31;MASCULINO;Barra Mansa
+28/06/2023 08:28:00;Paula Lima 20;153.336.133-62;28/06/2023;Pessoa Física;Sim;Declaração do IRPF dos anos anteriores;;;3;28;MASCULINO;Volta Redonda
+08/08/2023 08:27:00;Fernanda Alves 21;426.591.456-30;08/08/2023;Pessoa Física;Sim;Abertura de MEI;;;2;44;MASCULINO;Resende
+21/02/2023 10:58:00;Juliana Ribeiro 22;840.385.410-16;21/02/2023;Pessoa Jurídica;Sim;Outro:;;;2;73;MASCULINO;Itatiaia
+15/07/2023 08:41:00;Marcos Rocha 23;337.441.785-37;15/07/2023;Pessoa Física;Sim;Emissão de DARF;;;2;69;FEMININO;Porto Real
+30/11/2023 17:49:00;Pedro Santos 24;211.788.285-31;30/11/2023;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;0;67;FEMININO;Volta Redonda
+03/12/2023 09:38:00;Marcos Rocha 25;865.200.678-69;03/12/2023;Pessoa Jurídica;Sim;Emissão de DARF;;;3;18;MASCULINO;Quatis
+13/04/2023 14:00:00;Ana Costa 26;986.746.125-67;13/04/2023;Pessoa Jurídica;Sim;Declaração de MEI;;;2;61;MASCULINO;Porto Real
+26/02/2023 09:24:00;Pedro Santos 27;421.236.769-21;26/02/2023;Pessoa Física;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;2;70;FEMININO;Resende
+24/09/2023 17:22:00;Pedro Santos 28;969.466.801-84;24/09/2023;Pessoa Física;Sim;Emissão de DARF;;;0;46;MASCULINO;Itatiaia
+24/02/2023 15:16:00;Pedro Santos 29;628.344.197-37;24/02/2023;Pessoa Física;Não;Declaração do IRPF dos anos anteriores;;;0;35;MASCULINO;Resende
+17/04/2023 16:48:00;Fernanda Alves 30;712.646.827-40;17/04/2023;Pessoa Jurídica;Sim;Abertura de MEI;;;0;28;FEMININO;Itatiaia
+16/03/2023 09:34:00;Maria Oliveira 31;433.621.982-43;16/03/2023;Pessoa Jurídica;Sim;Outro:;Declaração Retificadora;;0;21;MASCULINO;Porto Real
+28/09/2023 09:44:00;Maria Oliveira 32;910.554.717-88;28/09/2023;Pessoa Física;Sim;Compensação de Multa;;;0;25;FEMININO;Porto Real
+11/02/2023 13:57:00;Maria Oliveira 33;964.419.437-21;11/02/2023;Pessoa Jurídica;Sim;Compensação de Multa;;;1;20;MASCULINO;Resende
+24/03/2023 15:18:00;Pedro Santos 34;250.416.393-60;24/03/2023;Pessoa Jurídica;Não;Declaração de MEI;;;0;43;MASCULINO;Resende
+05/06/2023 10:56:00;João Silva 35;331.867.448-95;05/06/2023;Pessoa Jurídica;Sim;Abertura de MEI;;;10;69;MASCULINO;Resende
+01/02/2023 15:02:00;Ana Costa 36;274.127.718-88;01/02/2023;Pessoa Física;Sim;Compensação de Multa;;;3;48;FEMININO;Barra Mansa
+13/06/2023 12:00:00;Lucas Mendes 37;917.953.292-42;13/06/2023;Pessoa Física;Não;Declaração de MEI;;;0;35;MASCULINO;Itatiaia
+15/04/2023 08:26:00;Fernanda Alves 38;457.358.864-55;15/04/2023;Pessoa Jurídica;Sim;Declaração do IRPF dos anos anteriores;;;2;34;FEMININO;Itatiaia
+26/06/2023 15:44:00;João Silva 39;129.669.238-74;26/06/2023;Pessoa Jurídica;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;10;23;FEMININO;Resende
+22/12/2023 14:14:00;Maria Oliveira 40;520.294.967-98;22/12/2023;Pessoa Jurídica;Sim;Outro:;;;0;31;MASCULINO;Quatis
+08/12/2023 13:12:00;Lucas Mendes 41;574.889.214-11;08/12/2023;Pessoa Jurídica;Não;Declaração Anual ou Retificadora e informação sobre IRPF;;;1;62;MASCULINO;Resende
+15/04/2023 13:13:00;Lucas Mendes 42;190.342.737-55;15/04/2023;Pessoa Física;Não;Declaração do IRPF dos anos anteriores;;;3;25;FEMININO;Volta Redonda
+03/06/2023 12:37:00;Marcos Rocha 43;314.560.378-37;03/06/2023;Pessoa Física;Sim;Emissão de DARF;;;2;28;MASCULINO;Resende
+19/01/2023 13:41:00;João Silva 44;670.248.575-13;19/01/2023;Pessoa Jurídica;Sim;Outro:;INSS;;2;57;FEMININO;Itatiaia
+04/03/2023 17:06:00;João Silva 45;166.484.106-74;04/03/2023;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;5;65;MASCULINO;Volta Redonda
+04/09/2023 09:06:00;Lucas Mendes 46;466.554.567-21;04/09/2023;Pessoa Física;Sim;Declaração de MEI;;;0;51;FEMININO;Quatis
+13/02/2023 11:55:00;Fernanda Alves 47;400.630.640-70;13/02/2023;Pessoa Física;Sim;Declaração do IRPF dos anos anteriores;;;1;39;FEMININO;Volta Redonda
+11/07/2023 17:32:00;Carlos Souza 48;488.484.416-69;11/07/2023;Pessoa Jurídica;Sim;Declaração de MEI;;;0;53;MASCULINO;Porto Real
+10/12/2023 13:39:00;Marcos Rocha 49;704.451.211-83;10/12/2023;Pessoa Física;Não;Emissão de DARF;;;0;44;FEMININO;Porto Real
+07/10/2023 12:25:00;Maria Oliveira 50;978.693.325-70;07/10/2023;Pessoa Física;Não;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;1;25;MASCULINO;Resende
+30/01/2023 16:55:00;Fernanda Alves 51;768.253.565-76;30/01/2023;Pessoa Física;Sim;Abertura de MEI;;;2;48;FEMININO;Volta Redonda
+14/10/2023 10:39:00;Marcos Rocha 52;489.287.301-86;14/10/2023;Pessoa Física;Sim;Compensação de Multa;;;2;50;FEMININO;Porto Real
+16/11/2023 15:31:00;Paula Lima 53;735.567.658-94;16/11/2023;Pessoa Jurídica;Sim;Outro:;INSS;;3;53;FEMININO;Resende
+31/01/2023 14:53:00;Carlos Souza 54;254.236.444-87;31/01/2023;Pessoa Física;Sim;Declaração Anual ou Retificadora e informação sobre IRPF, Emissão de DARF;;;1;38;MASCULINO;Quatis
+13/09/2023 16:54:00;Paula Lima 55;756.806.809-47;13/09/2023;Pessoa Física;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;2;73;MASCULINO;Quatis
+09/02/2023 15:05:00;Carlos Souza 56;312.813.240-71;09/02/2023;Pessoa Física;Sim;Abertura de MEI;;;1;75;MASCULINO;Itatiaia
+09/08/2023 17:49:00;Ana Costa 57;723.736.518-26;09/08/2023;Pessoa Física;Sim;Outro:;irpf 2024;;0;30;MASCULINO;Porto Real
+08/03/2023 15:56:00;Juliana Ribeiro 58;602.104.221-40;08/03/2023;Pessoa Física;Sim;Emissão de DARF;;;1;70;FEMININO;Barra Mansa
+21/03/2023 12:37:00;Pedro Santos 59;372.555.616-93;21/03/2023;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF, Outro:;PARCELAMENTO;;1;34;FEMININO;Barra Mansa
+15/05/2023 11:36:00;Maria Oliveira 60;591.310.790-69;15/05/2023;Pessoa Física;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;0;48;MASCULINO;Barra Mansa
+28/11/2023 14:04:00;Marcos Rocha 61;572.369.120-67;28/11/2023;Pessoa Física;Sim;Emissão de DARF;;;3;72;MASCULINO;Porto Real
+12/11/2023 16:40:00;Juliana Ribeiro 62;718.934.421-24;12/11/2023;Pessoa Jurídica;Sim;Outro:;Declaração Retificadora;;2;26;FEMININO;Quatis
+04/11/2023 13:55:00;Lucas Mendes 63;857.787.683-33;04/11/2023;Pessoa Jurídica;Sim;Outro:;irpf 2024;;3;73;FEMININO;Porto Real
+19/01/2023 14:26:00;João Silva 64;942.954.303-69;19/01/2023;Pessoa Física;Sim;Abertura de MEI;;;0;49;MASCULINO;Porto Real
+17/07/2023 08:43:00;Marcos Rocha 65;367.508.706-20;17/07/2023;Pessoa Jurídica;Sim;Compensação de Multa;;;5;18;MASCULINO;Barra Mansa
+16/10/2023 08:12:00;Carlos Souza 66;915.310.408-84;16/10/2023;Pessoa Jurídica;Sim;Outro:;Emissão de DARF;;0;22;FEMININO;Itatiaia
+16/01/2023 14:12:00;Pedro Santos 67;411.744.379-19;16/01/2023;Pessoa Jurídica;Sim;Declaração Anual ou Retificadora e informação sobre IRPF, Emissão de DARF;;;1;60;FEMININO;Volta Redonda
+29/05/2023 11:32:00;Lucas Mendes 68;353.365.461-31;29/05/2023;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;0;23;FEMININO;Volta Redonda
+05/05/2023 12:28:00;João Silva 69;878.190.489-29;05/05/2023;Pessoa Jurídica;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;10;39;FEMININO;Porto Real
+16/02/2023 11:53:00;Lucas Mendes 70;641.905.611-18;16/02/2023;Pessoa Física;Sim;Declaração do IRPF dos anos anteriores;;;0;66;FEMININO;Resende
+19/01/2023 08:25:00;Maria Oliveira 71;132.684.691-24;19/01/2023;Pessoa Jurídica;Sim;Outro:;INSS;;10;19;MASCULINO;Quatis
+10/01/2023 11:04:00;Paula Lima 72;773.289.688-59;10/01/2023;Pessoa Jurídica;Sim;Abertura de MEI;;;2;75;MASCULINO;Volta Redonda
+14/02/2023 16:46:00;Carlos Souza 73;983.266.787-80;14/02/2023;Pessoa Física;Não;Compensação de Multa;;;1;21;FEMININO;Volta Redonda
+13/06/2023 08:09:00;Fernanda Alves 74;264.625.778-13;13/06/2023;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF, Outro:;Emissão de DARF;;1;27;MASCULINO;Quatis
+06/08/2023 11:33:00;Maria Oliveira 75;456.471.155-55;06/08/2023;Pessoa Jurídica;Sim;Emissão de DARF;;;2;38;MASCULINO;Quatis
+20/12/2023 09:41:00;João Silva 76;149.762.888-30;20/12/2023;Pessoa Jurídica;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;5;69;FEMININO;Resende
+23/01/2023 13:46:00;Maria Oliveira 77;474.372.848-67;23/01/2023;Pessoa Jurídica;Sim;Emissão de DARF;;;0;72;MASCULINO;Resende
+07/06/2023 08:01:00;Ana Costa 78;170.623.887-17;07/06/2023;Pessoa Física;Não;Emissão de DARF;;;0;18;MASCULINO;Barra Mansa
+05/07/2023 11:42:00;Lucas Mendes 79;725.464.310-22;05/07/2023;Pessoa Jurídica;Não;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;1;27;MASCULINO;Resende
+30/11/2023 09:02:00;Maria Oliveira 80;636.849.161-17;30/11/2023;Pessoa Física;Sim;Abertura de MEI;;;10;26;FEMININO;Barra Mansa
+13/10/2023 17:16:00;Paula Lima 81;715.783.495-56;13/10/2023;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;0;73;MASCULINO;Porto Real
+11/08/2023 08:16:00;Paula Lima 82;397.852.802-76;11/08/2023;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF, Outro:;.;;2;28;MASCULINO;Porto Real
+21/01/2023 16:58:00;Carlos Souza 83;739.924.639-25;21/01/2023;Pessoa Jurídica;Sim;Abertura de MEI;;;3;56;MASCULINO;Volta Redonda
+24/11/2023 16:40:00;Lucas Mendes 84;798.620.447-36;24/11/2023;Pessoa Jurídica;Sim;Emissão de DARF;;;10;47;MASCULINO;Barra Mansa
+14/03/2023 16:54:00;Paula Lima 85;585.823.681-45;14/03/2023;Pessoa Física;Sim;Emissão de DARF;;;1;69;FEMININO;Resende
+15/06/2023 17:45:00;Juliana Ribeiro 86;877.319.545-80;15/06/2023;Pessoa Jurídica;Sim;Declaração do IRPF dos anos anteriores;;;2;22;FEMININO;Itatiaia
+14/05/2023 11:06:00;Maria Oliveira 87;372.385.665-75;14/05/2023;Pessoa Jurídica;Sim;Abertura de MEI;;;3;64;FEMININO;Itatiaia
+09/10/2023 16:23:00;Juliana Ribeiro 88;697.122.749-53;09/10/2023;Pessoa Jurídica;Sim;Abertura de MEI;;;5;35;FEMININO;Barra Mansa
+02/11/2023 09:48:00;Paula Lima 89;836.131.663-21;02/11/2023;Pessoa Jurídica;Não;Declaração Anual ou Retificadora e informação sobre IRPF, Emissão de DARF;;;2;43;FEMININO;Barra Mansa
+26/02/2023 13:54:00;Juliana Ribeiro 90;858.117.423-54;26/02/2023;Pessoa Jurídica;Sim;Abertura de MEI;;;0;24;MASCULINO;Porto Real
+17/10/2023 13:58:00;Ana Costa 91;857.928.404-98;17/10/2023;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;2;62;MASCULINO;Resende
+05/11/2023 08:58:00;Ana Costa 92;828.301.861-46;05/11/2023;Pessoa Física;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF, Outro:;Declaração Retificadora;;1;51;FEMININO;Quatis
+16/05/2023 10:09:00;Lucas Mendes 93;198.973.978-73;16/05/2023;Pessoa Jurídica;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;1;39;FEMININO;Barra Mansa
+19/07/2023 15:16:00;Juliana Ribeiro 94;944.534.317-18;19/07/2023;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;1;73;MASCULINO;Quatis
+26/10/2023 09:55:00;João Silva 95;252.208.855-90;26/10/2023;Pessoa Jurídica;Sim;Declaração do IRPF dos anos anteriores;;;2;37;MASCULINO;Quatis
+01/09/2023 08:18:00;Carlos Souza 96;583.714.158-64;01/09/2023;Pessoa Jurídica;Não;Emissão de DARF;;;3;29;FEMININO;Barra Mansa
+09/11/2023 17:00:00;Fernanda Alves 97;224.586.549-51;09/11/2023;Pessoa Jurídica;Sim;Declaração de MEI;;;2;25;FEMININO;Volta Redonda
+06/03/2023 09:31:00;Pedro Santos 98;424.437.412-63;06/03/2023;Pessoa Jurídica;Não;Declaração de MEI;;;1;19;FEMININO;Porto Real
+20/11/2023 13:34:00;Carlos Souza 99;183.904.798-62;20/11/2023;Pessoa Física;Sim;Compensação de Multa;;;0;29;FEMININO;Volta Redonda
