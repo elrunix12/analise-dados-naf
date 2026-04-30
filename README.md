@@ -11,6 +11,7 @@ A ferramenta foi construída com foco em **segurança e conformidade com a LGPD*
 - **Desmembramento de Atendimentos Múltiplos:** Identifica quando um único usuário seleciona múltiplos serviços em um único formulário e contabiliza a volumetria de serviços de forma correta, sem distorcer o número total de pessoas físicas atendidas.
 - **Filtros Dinâmicos Multi-nível:** Análise granular através de filtros combinados: `Ano`, `Mês`, `Município`, `Público` (PF/PJ), `Faixa Etária`, `Gênero` e `Status de Conclusão`.
 - **Análise de Desigualdade de Gênero:** Visualização dedicada e filtrada exclusivamente para mensurar a proporção entre os gêneros Masculino e Feminino nas solicitações de Imposto de Renda.
+- **Filtro para Folhas Impressas:** A ferramenta sempre pegará o maior valor da coluna `Se houver, quantas folhas foram impressas:`. Isso impede que células com `ate`ou com vírgula sejam preenchidas incorretamente.
 
 ## 📝 Como Estruturar o Google Forms e o Google Sheets
 

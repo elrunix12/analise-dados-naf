@@ -252,8 +252,10 @@
                 const idadeExtraida = parseInt((row[idadeKey] || "0").replace(/\D/g, ''));
                 const faixaEtaria = categorizarIdade(idadeExtraida, row[idadeKey]);
 
-                // Folhas (Global - sem split)
-                const numFolhas = parseInt((row[folhasKey] || "0").replace(/\D/g, '')) || 0;
+                // Folhas (Global - sem split): Extrai todos os números da string e usa o maior valor
+                const folhasStr = row[folhasKey] || "0";
+                const numerosEncontrados = folhasStr.match(/\d+/g); 
+                const numFolhas = numerosEncontrados ? Math.max(...numerosEncontrados.map(Number)) : 0;
                 globalFolhas += numFolhas;
 
                 // Split de Múltiplos Serviços
