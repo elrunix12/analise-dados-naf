@@ -29,32 +29,79 @@
 
     <main class="container mx-auto px-6 py-8" id="dashboard-content" style="display: none;">
         
-        <!-- Área de Filtros -->
-        <section class="bg-white p-4 rounded-xl shadow-sm mb-6 border border-slate-200 flex flex-wrap gap-4 items-end">
-            <div>
-                <label class="block text-xs font-semibold text-slate-500 mb-1">Ano</label>
-                <select id="filter-ano" class="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-2">
-                    <option value="ALL">Todos</option>
-                </select>
+        <!-- Área de Filtros Expandida (Grid Layout) -->
+        <section class="bg-white p-4 rounded-xl shadow-sm mb-6 border border-slate-200">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-sm font-bold text-slate-700">Filtros de Análise</h2>
+                <button id="btn-reset" class="text-xs text-blue-600 hover:text-blue-800 font-medium underline">Limpar Todos</button>
             </div>
-            <div>
-                <label class="block text-xs font-semibold text-slate-500 mb-1">Status de Conclusão</label>
-                <select id="filter-conclusivo" class="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2">
-                    <option value="ALL">Todos</option>
-                    <option value="SIM">Conclusivo (Sim)</option>
-                    <option value="NÃO">Não Conclusivo (Não)</option>
-                </select>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Ano</label>
+                    <select id="filter-ano" class="bg-slate-50 border border-slate-300 text-xs rounded-lg focus:ring-blue-500 w-full p-2">
+                        <option value="ALL">Todos</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Mês</label>
+                    <select id="filter-mes" class="bg-slate-50 border border-slate-300 text-xs rounded-lg focus:ring-blue-500 w-full p-2">
+                        <option value="ALL">Todos</option>
+                        <option value="01">Janeiro</option>
+                        <option value="02">Fevereiro</option>
+                        <option value="03">Março</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Maio</option>
+                        <option value="06">Junho</option>
+                        <option value="07">Julho</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Município</label>
+                    <select id="filter-municipio" class="bg-slate-50 border border-slate-300 text-xs rounded-lg focus:ring-blue-500 w-full p-2 truncate">
+                        <option value="ALL">Todos</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Público</label>
+                    <select id="filter-tipo-user" class="bg-slate-50 border border-slate-300 text-xs rounded-lg focus:ring-blue-500 w-full p-2">
+                        <option value="ALL">Todos</option>
+                        <option value="PESSOA FÍSICA">Pessoa Física</option>
+                        <option value="PESSOA JURÍDICA">Pessoa Jurídica</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Faixa Etária</label>
+                    <select id="filter-idade" class="bg-slate-50 border border-slate-300 text-xs rounded-lg focus:ring-blue-500 w-full p-2">
+                        <option value="ALL">Todas</option>
+                        <option value="Até 25">Até 25 anos</option>
+                        <option value="26 a 40">26 a 40 anos</option>
+                        <option value="41 a 60">41 a 60 anos</option>
+                        <option value="Acima de 60">Acima de 60 anos</option>
+                        <option value="Não Informado">Não Informado</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Gênero</label>
+                    <select id="filter-genero" class="bg-slate-50 border border-slate-300 text-xs rounded-lg focus:ring-blue-500 w-full p-2">
+                        <option value="ALL">Todos</option>
+                        <option value="MASCULINO">Masculino</option>
+                        <option value="FEMININO">Feminino</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Conclusão</label>
+                    <select id="filter-conclusivo" class="bg-slate-50 border border-slate-300 text-xs rounded-lg focus:ring-blue-500 w-full p-2">
+                        <option value="ALL">Todos</option>
+                        <option value="SIM">Conclusivo (Sim)</option>
+                        <option value="NÃO">Não Conclusivo (Não)</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label class="block text-xs font-semibold text-slate-500 mb-1">Gênero</label>
-                <select id="filter-genero" class="bg-slate-50 border border-slate-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2">
-                    <option value="ALL">Todos</option>
-                    <option value="MASCULINO">Masculino</option>
-                    <option value="FEMININO">Feminino</option>
-                </select>
-            </div>
-            <div class="flex-grow"></div>
-            <button id="btn-reset" class="text-sm text-slate-500 hover:text-blue-600 underline">Limpar Filtros</button>
         </section>
 
         <!-- KPI Cards -->
@@ -62,17 +109,17 @@
             <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-blue-500">
                 <h3 class="text-slate-500 text-sm font-semibold mb-1">Pessoas Atendidas</h3>
                 <p class="text-3xl font-bold text-slate-800" id="kpi-total">0</p>
-                <p class="text-xs text-slate-400 mt-2">Registros únicos no formulário (linhas)</p>
+                <p class="text-xs text-slate-400 mt-2">Registros únicos no formulário</p>
             </div>
             <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-emerald-500">
                 <h3 class="text-slate-500 text-sm font-semibold mb-1">Total de Contribuintes MEI</h3>
                 <p class="text-3xl font-bold text-slate-800" id="kpi-mei">0</p>
-                <p class="text-xs text-slate-400 mt-2">Pessoas que buscaram Abertura ou DASN</p>
+                <p class="text-xs text-slate-400 mt-2">Demandas de Abertura ou DASN</p>
             </div>
             <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-purple-500">
                 <h3 class="text-slate-500 text-sm font-semibold mb-1">Folhas Impressas</h3>
                 <p class="text-3xl font-bold text-slate-800" id="kpi-folhas">0</p>
-                <p class="text-xs text-slate-400 mt-2">Soma total de impressões</p>
+                <p class="text-xs text-slate-400 mt-2">Soma bruta de impressões (sem filtros)</p>
             </div>
         </section>
 
@@ -122,26 +169,34 @@
         let globalFolhas = 0; 
         let chartInstances = {};
 
+        // DOM Elements
         const fileInput = document.getElementById('csv-upload');
         const dashboard = document.getElementById('dashboard-content');
         const emptyState = document.getElementById('empty-state');
         
+        // Filtros
         const filterAno = document.getElementById('filter-ano');
-        const filterConclusivo = document.getElementById('filter-conclusivo');
+        const filterMes = document.getElementById('filter-mes');
+        const filterMunicipio = document.getElementById('filter-municipio');
+        const filterTipoUser = document.getElementById('filter-tipo-user');
+        const filterIdade = document.getElementById('filter-idade');
         const filterGenero = document.getElementById('filter-genero');
+        const filterConclusivo = document.getElementById('filter-conclusivo');
         const btnReset = document.getElementById('btn-reset');
 
+        // Listeners
+        const todosFiltros = [filterAno, filterMes, filterMunicipio, filterTipoUser, filterIdade, filterGenero, filterConclusivo];
+        todosFiltros.forEach(f => f.addEventListener('change', updateDashboard));
         fileInput.addEventListener('change', handleFileUpload);
-        filterAno.addEventListener('change', updateDashboard);
-        filterConclusivo.addEventListener('change', updateDashboard);
-        filterGenero.addEventListener('change', updateDashboard);
         
         btnReset.addEventListener('click', () => {
-            filterAno.value = "ALL";
-            filterConclusivo.value = "ALL";
-            filterGenero.value = "ALL";
+            todosFiltros.forEach(f => f.value = "ALL");
             updateDashboard();
         });
+
+        // ==========================================
+        // PIPELINE DE DADOS
+        // ==========================================
 
         function handleFileUpload(event) {
             const file = event.target.files[0];
@@ -155,7 +210,7 @@
                     processarDadosBrutos(results.data);
                 },
                 error: function(err) {
-                    alert("Erro ao processar o CSV. Verifique a formatação do arquivo.");
+                    alert("Erro ao processar o CSV.");
                     console.error(err);
                 }
             });
@@ -165,49 +220,59 @@
             globalAtendimentos = [];
             globalFolhas = 0;
             let anosEncontrados = new Set(); 
+            let municipiosEncontrados = new Set();
 
-            // Adicionado parâmetro 'index' para gerar um ID único por linha
             rawData.forEach((row, index) => {
+                // Buscas dinâmicas de coluna para maior resiliência
                 const dateKey = Object.keys(row).find(k => k.toLowerCase().includes('data de atendimento')) || 
                                 Object.keys(row).find(k => k.toLowerCase().includes('carimbo de data'));
                 const folhasKey = Object.keys(row).find(k => k.toLowerCase().includes('folhas'));
                 const tipoKey = Object.keys(row).find(k => k.toLowerCase().includes('tipo de atendimento') && !k.toLowerCase().includes('usuário'));
                 const outroKey = Object.keys(row).find(k => k.toLowerCase().includes('respondeu outro'));
-                const sexoKey = Object.keys(row).find(k => k.toLowerCase().includes('sexo'));
+                const sexoKey = Object.keys(row).find(k => k.toLowerCase() === 'sexo' || k.toLowerCase().includes('sexo'));
                 const conclusivoKey = Object.keys(row).find(k => k.toLowerCase().includes('conclusivo'));
+                const municipioKey = Object.keys(row).find(k => k.toLowerCase().includes('município'));
+                const tipoUserKey = Object.keys(row).find(k => k.toLowerCase().includes('tipo de usuário'));
+                const idadeKey = Object.keys(row).find(k => k.toLowerCase() === 'idade');
 
                 const rawDate = (row[dateKey] || "").trim();
                 if (!rawDate) return; 
 
+                // Extrações Temporais
                 const dateParsed = extractDateString(rawDate);
                 const anoExtraido = extrairAno(dateParsed);
-                
-                if (anoExtraido !== "Indefinido") {
-                    anosEncontrados.add(anoExtraido);
-                }
+                const mesExtraido = extrairMes(dateParsed);
+                if (anoExtraido !== "Indefinido") anosEncontrados.add(anoExtraido);
 
+                // Extração Geográfica
+                const municipioExtraido = normalizarStr(row[municipioKey]);
+                if (municipioExtraido) municipiosEncontrados.add(municipioExtraido);
+
+                // Demografia
+                const idadeExtraida = parseInt((row[idadeKey] || "0").replace(/\D/g, ''));
+                const faixaEtaria = categorizarIdade(idadeExtraida, row[idadeKey]);
+
+                // Folhas (Global - sem split)
                 const numFolhas = parseInt((row[folhasKey] || "0").replace(/\D/g, '')) || 0;
                 globalFolhas += numFolhas;
 
+                // Split de Múltiplos Serviços
                 const tiposAtendimentoStr = (row[tipoKey] || "").trim();
                 const outroAtendimentoStr = (row[outroKey] || "").trim();
                 
-                const combinedTypes = [tiposAtendimentoStr, outroAtendimentoStr]
-                    .filter(t => t !== "")
-                    .join(",");
-                
-                let atendimentosFragmentados = combinedTypes.split(",")
-                    .map(t => t.trim())
-                    .filter(t => t !== "");
-
+                const combinedTypes = [tiposAtendimentoStr, outroAtendimentoStr].filter(t => t !== "").join(",");
+                let atendimentosFragmentados = combinedTypes.split(",").map(t => t.trim()).filter(t => t !== "");
                 if (atendimentosFragmentados.length === 0) atendimentosFragmentados = ["Outros"];
 
-                // Aqui cada fragmento recebe o ID da linha original que o gerou
                 atendimentosFragmentados.forEach(atendimento => {
                     globalAtendimentos.push({
-                        idLinha: index, // Vínculo com a linha do CSV
+                        idLinha: index,
                         dataStr: dateParsed,
                         ano: anoExtraido,
+                        mes: mesExtraido,
+                        municipio: municipioExtraido,
+                        tipoUser: normalizarStr(row[tipoUserKey]),
+                        idadeFaixa: faixaEtaria,
                         categoria: categorizar(atendimento),
                         sexo: normalizarStr(row[sexoKey]),
                         conclusivo: normalizarStr(row[conclusivoKey])
@@ -215,38 +280,21 @@
                 });
             });
 
-            popularFiltroAnos(Array.from(anosEncontrados).sort((a, b) => b - a)); 
+            popularDropdown(filterAno, Array.from(anosEncontrados).sort((a, b) => b - a)); 
+            popularDropdown(filterMunicipio, Array.from(municipiosEncontrados).sort());
 
             emptyState.style.display = 'none';
             dashboard.style.display = 'block';
-
             updateDashboard();
         }
 
-        function extrairAno(dateStr) {
-            if (dateStr === "Data Indefinida") return "Indefinido";
-            const parts = dateStr.split(/[\/\-]/);
-            if (parts.length >= 3) {
-                const year = parts[2].length === 4 ? parts[2] : parts[0]; 
-                return year;
-            }
-            return "Indefinido";
-        }
-
-        function popularFiltroAnos(anos) {
-            filterAno.innerHTML = '<option value="ALL">Todos</option>';
-            anos.forEach(ano => {
-                const opt = document.createElement('option');
-                opt.value = ano;
-                opt.textContent = ano;
-                filterAno.appendChild(opt);
-            });
-        }
+        // ==========================================
+        // FUNÇÕES AUXILIARES
+        // ==========================================
 
         function categorizar(texto) {
             const textoNorm = normalizarStr(texto);
             if (!textoNorm) return "Outros";
-
             for (const [cat, chaves] of Object.entries(categoriasDicionario)) {
                 if (cat === "Outros") continue;
                 for (const chave of chaves) {
@@ -254,6 +302,15 @@
                 }
             }
             return "Outros";
+        }
+
+        function categorizarIdade(idadeNum, idadeRaw) {
+            if (!idadeRaw || String(idadeRaw).trim() === "") return "Não Informado";
+            if (idadeNum <= 25) return "Até 25";
+            if (idadeNum >= 26 && idadeNum <= 40) return "26 a 40";
+            if (idadeNum >= 41 && idadeNum <= 60) return "41 a 60";
+            if (idadeNum > 60) return "Acima de 60";
+            return "Não Informado";
         }
 
         function normalizarStr(str) {
@@ -266,29 +323,67 @@
             return match ? match[1] : "Data Indefinida";
         }
 
+        function extrairAno(dateStr) {
+            if (dateStr === "Data Indefinida") return "Indefinido";
+            const parts = dateStr.split(/[\/\-]/);
+            return parts.length >= 3 ? (parts[2].length === 4 ? parts[2] : parts[0]) : "Indefinido";
+        }
+
+        function extrairMes(dateStr) {
+            if (dateStr === "Data Indefinida") return "Indefinido";
+            const parts = dateStr.split(/[\/\-]/);
+            if (parts.length >= 3) {
+                // Se o ano for o part[0] (YYYY-MM-DD), o mês é o part[1]
+                // Se o ano for o part[2] (DD/MM/YYYY), o mês é o part[1]
+                let mes = parts[1];
+                return mes.padStart(2, '0'); // Garante que seja "01", "02", etc
+            }
+            return "Indefinido";
+        }
+
+        function popularDropdown(selectElement, arrayValores) {
+            selectElement.innerHTML = '<option value="ALL">Todos</option>';
+            arrayValores.forEach(val => {
+                if(val) {
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    // Capitaliza apenas primeira letra de cada palavra (para municípios)
+                    opt.textContent = val.toLowerCase().replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+                    selectElement.appendChild(opt);
+                }
+            });
+        }
+
+        // ==========================================
+        // MOTOR GRÁFICO E FILTROS
+        // ==========================================
+
         function updateDashboard() {
-            const filtroAnoVal = filterAno.value;
-            const filtroConclusivoVal = filterConclusivo.value;
-            const filtroGeneroVal = filterGenero.value;
+            const fAno = filterAno.value;
+            const fMes = filterMes.value;
+            const fMuni = filterMunicipio.value;
+            const fUser = filterTipoUser.value;
+            const fIdade = filterIdade.value;
+            const fGenero = filterGenero.value;
+            const fConclusivo = filterConclusivo.value;
 
             const dadosFiltrados = globalAtendimentos.filter(d => {
-                const matchAno = filtroAnoVal === "ALL" || (d.ano === filtroAnoVal);
-                const matchConclusivo = filtroConclusivoVal === "ALL" || (d.conclusivo.includes(filtroConclusivoVal));
-                const matchGenero = filtroGeneroVal === "ALL" || (d.sexo.includes(filtroGeneroVal));
-                return matchAno && matchConclusivo && matchGenero;
+                return (fAno === "ALL" || d.ano === fAno) &&
+                       (fMes === "ALL" || d.mes === fMes) &&
+                       (fMuni === "ALL" || d.municipio === fMuni) &&
+                       (fUser === "ALL" || d.tipoUser.includes(fUser)) &&
+                       (fIdade === "ALL" || d.idadeFaixa === fIdade) &&
+                       (fGenero === "ALL" || d.sexo.includes(fGenero)) &&
+                       (fConclusivo === "ALL" || d.conclusivo.includes(fConclusivo));
             });
 
-            // CORREÇÃO: Conta apenas os IDs de linhas únicos (Set remove as duplicatas)
-            const pessoasUnicas = new Set(dadosFiltrados.map(d => d.idLinha)).size;
-            document.getElementById('kpi-total').innerText = pessoasUnicas;
-            
-            // CORREÇÃO: Conta IDs únicos para MEIs também, evitando duplicar caso a pessoa faça Abertura e DASN no mesmo dia
+            // KPIs (Baseados em IDs Únicos)
+            document.getElementById('kpi-total').innerText = new Set(dadosFiltrados.map(d => d.idLinha)).size;
             const arrayMEIs = dadosFiltrados.filter(d => d.categoria === 'Abertura de MEI' || d.categoria === 'DASN MEI');
-            const meisUnicos = new Set(arrayMEIs.map(d => d.idLinha)).size;
-            document.getElementById('kpi-mei').innerText = meisUnicos;
-            
+            document.getElementById('kpi-mei').innerText = new Set(arrayMEIs.map(d => d.idLinha)).size;
             document.getElementById('kpi-folhas').innerText = globalFolhas; 
 
+            // Renderização
             renderChartCategorias(dadosFiltrados);
             renderChartGeneroIRPF(dadosFiltrados);
             renderChartEvolucao(dadosFiltrados);
@@ -322,10 +417,8 @@
         }
 
         function renderChartGeneroIRPF(dados) {
-            // No gráfico de pizza a gente mantém a contagem de serviços de IRPF normal
             const dadosIRPF = dados.filter(d => d.categoria === 'Imposto de Renda');
             let masc = 0, fem = 0;
-
             dadosIRPF.forEach(d => {
                 if(d.sexo.includes('MASCULINO')) masc++;
                 else if(d.sexo.includes('FEMININO')) fem++;
@@ -345,32 +438,22 @@
                     }]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '70%',
-                    plugins: {
-                        legend: { position: 'bottom' }
-                    }
+                    responsive: true, maintainAspectRatio: false, cutout: '70%',
+                    plugins: { legend: { position: 'bottom' } }
                 }
             });
         }
 
         function renderChartEvolucao(dados) {
-            const contagemData = {};
-            
-            // Para a linha do tempo, também queremos pessoas únicas por dia em vez de volume de serviço
-            // Então vamos rastrear os IDs únicos que passaram naquele dia
             const datasComIds = {};
-
             dados.forEach(d => {
                 if(d.dataStr === "Data Indefinida") return;
                 if(!datasComIds[d.dataStr]) datasComIds[d.dataStr] = new Set();
                 datasComIds[d.dataStr].add(d.idLinha);
             });
 
-            for (const dataStr in datasComIds) {
-                contagemData[dataStr] = datasComIds[dataStr].size;
-            }
+            const contagemData = {};
+            for (const dataStr in datasComIds) contagemData[dataStr] = datasComIds[dataStr].size;
 
             const datasOrdenadas = Object.keys(contagemData).sort((a, b) => {
                 const [d1, m1, y1] = a.split(/[\/\-]/);
@@ -379,7 +462,6 @@
             });
 
             const valores = datasOrdenadas.map(d => contagemData[d]);
-
             const ctx = document.getElementById('chartEvolucao').getContext('2d');
             if(chartInstances.evolucao) chartInstances.evolucao.destroy();
 
@@ -392,15 +474,12 @@
                         data: valores,
                         borderColor: '#10b981',
                         backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                        borderWidth: 2,
-                        tension: 0.3,
-                        fill: true,
+                        borderWidth: 2, tension: 0.3, fill: true,
                         pointBackgroundColor: '#10b981'
                     }]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
+                    responsive: true, maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
                 }
