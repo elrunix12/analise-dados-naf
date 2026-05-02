@@ -38,7 +38,7 @@ A aplicação faz uma busca flexível pelos cabeçalhos, mas é estritamente nec
 ### Como Exportar os Dados:
 1. Abra o Google Sheets vinculado ao seu Google Forms.
 2. Acesse: **Arquivo > Fazer download > Valores separados por vírgulas (.csv)**.
-3. Certifique-se de que o sistema operacional / Google Sheets exporte utilizando o padrão nacional com delimitador por ponto e vírgula (`;`).
+3. Certifique-se de que o sistema operacional / Google Sheets exporte utilizando o padrão nacional com delimitador por ponto e vírgula (`;`). Caso o delimitador esteja como vírgula (`,`), utilize o [Libreoffice Calc](https://pt-br.libreoffice.org/), salve como .csv escolha o delimitador ponto e vírgula (`;`).
 4. Importe o arquivo baixado diretamente no botão "Carregar CSV" do Dashboard.
 
 ## 🗂️ Dicionário de Categorização e Hierarquia
@@ -70,7 +70,7 @@ const categoriasDicionario = {
 Não é necessário instalar nenhum servidor ou framework (como Node.js ou Python).
 1. Faça o clone ou baixe este repositório.
 2. Abra o arquivo `index.html` em qualquer navegador web moderno (Google Chrome, Edge, Firefox, Safari).
-3. Faça o upload do arquivo CSV extraído do Google Sheets.
+3. Faça o upload do arquivo CSV extraído.
 
 ## 🛠️ Stack Tecnológica
 
