@@ -615,10 +615,19 @@
 
             // 1. Gráfico Gênero (Pie)
             let masc = 0, fem = 0;
+            // Cria um agrupador para garantir que cada pessoa seja contada apenas uma vez
+            const generoPorPessoa = {};
             dadosLocais.forEach(d => {
-                if(d.sexo.includes('MASCULINO')) masc++;
-                else if(d.sexo.includes('FEMININO')) fem++;
+                if (!generoPorPessoa[d.idLinha]) {
+                    generoPorPessoa[d.idLinha] = d.sexo;
+                }
             });
+            // Soma os gêneros baseando-se apenas nos indivíduos únicos
+            Object.values(generoPorPessoa).forEach(sexo => {
+                if(sexo.includes('MASCULINO')) masc++;
+                else if(sexo.includes('FEMININO')) fem++;
+            });
+            
             criarGraficoPizza('chartGenero', ['Masculino', 'Feminino'], [masc, fem], ['#3b82f6', '#ec4899']);
 
             // 2. Gráfico Idade (Bar)
