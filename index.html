@@ -42,22 +42,36 @@
                 </div>
             </div>
 
-            <!-- Direita: Botão de Upload -->
+            <!-- Direita: Botão de Upload e Configurações -->
             <div class="flex items-center space-x-2 lg:space-x-4 flex-shrink-0">
                 <span id="file-name" class="text-xs text-blue-300 hidden md:block max-w-[150px] truncate"></span>
                 
-                <!-- NOVO: Seletor de Delimitador -->
-                <select id="csv-delimiter" class="bg-blue-800 border border-blue-600 text-white text-xs rounded focus:ring-2 focus:ring-blue-400 p-2 outline-none cursor-pointer" title="Formato do CSV">
-                    <option value="auto">Auto-detectar</option>
-                    <option value=",">Vírgula (,)</option>
-                    <option value=";">Ponto e Vírgula (;)</option>
-                </select>
-
+                <!-- Botão Principal de Carregar (Agora vem primeiro) -->
                 <label for="csv-upload" class="cursor-pointer bg-blue-600 hover:bg-blue-500 transition px-4 py-2 rounded-md font-medium text-sm shadow-sm flex items-center">
                     <svg class="w-4 h-4 mr-2 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                     Carregar
                 </label>
                 <input id="csv-upload" type="file" accept=".csv" class="hidden" />
+
+                <!-- Botão de Configurações com Menu Suspenso (Agora à direita) -->
+                <div class="relative">
+                    <button id="btn-upload-config" class="p-2 bg-blue-800 hover:bg-blue-700 text-blue-200 hover:text-white rounded transition shadow-inner flex items-center justify-center" title="Configurações do Arquivo">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </button>
+                    
+                    <!-- Menu Dropdown (Oculto por padrão) -->
+                    <div id="dropdown-config" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-50 border border-slate-200">
+                        <div class="p-4 flex flex-col gap-2">
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Formato do CSV</label>
+                            <select id="csv-delimiter" class="w-full bg-slate-50 border border-slate-300 text-slate-700 text-sm rounded focus:ring-blue-500 p-2 outline-none cursor-pointer">
+                                <option value="auto">Auto-detectar</option>
+                                <option value=",">Vírgula (,)</option>
+                                <option value=";">Ponto e Vírgula (;)</option>
+                            </select>
+                            <p class="text-[10px] text-slate-400 leading-tight mt-1">Altere apenas se os gráficos apresentarem erro de leitura.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -74,15 +88,15 @@
     <main class="container mx-auto px-6 py-6 hidden" id="dashboard-content">
 
         <!-- NAVEGAÇÃO DAS ABAS (Centralizada) -->
-        <div class="border-b border-slate-200 mb-6 flex justify-center">
-            <nav class="flex space-x-4 md:space-x-8" aria-label="Tabs">
-                <button onclick="switchTab('geral')" id="nav-geral" class="tab-btn active-tab border-blue-500 text-blue-600 whitespace-nowrap py-4 px-2 border-b-2 font-medium text-sm transition-colors">
+        <div class="border-b border-slate-200 mb-6 flex justify-center px-4">
+            <nav class="flex space-x-2 md:space-x-4" aria-label="Tabs">
+                <button onclick="switchTab('geral')" id="nav-geral" class="tab-btn active-tab border-blue-800 text-blue-900 bg-blue-50 rounded-t-lg whitespace-nowrap py-3 px-4 border-b-2 font-semibold text-sm transition-all">
                     Geral
                 </button>
-                <button onclick="switchTab('operacional')" id="nav-operacional" class="tab-btn border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-4 px-2 border-b-2 font-medium text-sm transition-colors">
+                <button onclick="switchTab('operacional')" id="nav-operacional" class="tab-btn border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-50 rounded-t-lg whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm transition-all">
                     Operacional (Serviços)
                 </button>
-                <button onclick="switchTab('perfil')" id="nav-perfil" class="tab-btn border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-4 px-2 border-b-2 font-medium text-sm transition-colors">
+                <button onclick="switchTab('perfil')" id="nav-perfil" class="tab-btn border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-50 rounded-t-lg whitespace-nowrap py-3 px-4 border-b-2 font-medium text-sm transition-all">
                     Perfil do Contribuinte
                 </button>
             </nav>
@@ -93,7 +107,7 @@
             <!-- KPI Cards -->
             <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <!-- KPI 1 -->
-                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-blue-500 relative">
+                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-blue-600 relative">
                     <h3 class="text-slate-500 text-sm font-semibold mb-1">Pessoas Atendidas</h3>
                     <div class="flex items-end gap-3">
                         <p class="text-3xl font-bold text-slate-800" id="kpi-total">0</p>
@@ -102,7 +116,7 @@
                     <p class="text-xs text-slate-400 mt-2">Registros únicos na linha do tempo</p>
                 </div>
                 <!-- KPI 2 -->
-                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-emerald-500 relative">
+                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-sky-500 relative">
                     <h3 class="text-slate-500 text-sm font-semibold mb-1">Pessoas Contribuintes MEI</h3>
                     <div class="flex items-end gap-3">
                         <p class="text-3xl font-bold text-slate-800" id="kpi-mei">0</p>
@@ -111,7 +125,7 @@
                     <p class="text-xs text-slate-400 mt-2">Demandaram Abertura ou DASN</p>
                 </div>
                 <!-- KPI 3 -->
-                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-purple-500 relative">
+                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-indigo-600 relative">
                     <h3 class="text-slate-500 text-sm font-semibold mb-1">Folhas Impressas</h3>
                     <div class="flex items-end gap-3">
                         <p class="text-3xl font-bold text-slate-800" id="kpi-folhas">0</p>
@@ -124,8 +138,12 @@
             <!-- Gráfico Evolução -->
             <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 mb-8">
                 <h3 class="text-md font-bold text-slate-700 mb-4">Evolução Histórica de Atendimentos</h3>
-                <div class="relative h-80 w-full">
+                <div class="relative h-80 w-full flex flex-col justify-center">
                     <canvas id="chartEvolucao"></canvas>
+                    <div id="empty-chartEvolucao" class="hidden absolute inset-0 flex-col items-center justify-center bg-slate-50/80 rounded-lg border border-dashed border-slate-200 z-10">
+                        <svg class="w-8 h-8 text-slate-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <span class="text-sm text-slate-500 font-medium">Nenhum dado para este período</span>
+                    </div>
                 </div>
             </section>
         </div>
@@ -151,8 +169,11 @@
                         <svg class="w-4 h-4 ml-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                 </div>
-                <div class="relative h-[400px]">
+                <div class="relative h-[400px] flex flex-col justify-center">
                     <canvas id="chartCategorias"></canvas>
+                    <div id="empty-chartCategorias" class="hidden absolute inset-0 flex-col items-center justify-center bg-slate-50/80 rounded-lg border border-dashed border-slate-200 z-10">
+                        <span class="text-sm text-slate-500 font-medium">Nenhum serviço atende a estes filtros</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -186,10 +207,13 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                 <!-- Demografia: Gênero -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col">
                     <h3 class="text-md font-bold text-slate-700 mb-4">Distribuição de Gênero</h3>
-                    <div class="relative h-64 flex justify-center">
+                    <div class="relative flex-grow min-h-[200px] flex items-center justify-center">
                         <canvas id="chartGenero"></canvas>
+                        <div id="empty-chartGenero" class="hidden absolute inset-0 flex-col items-center justify-center bg-slate-50/80 rounded-lg border border-dashed border-slate-200 z-10">
+                            <span class="text-xs text-slate-400 font-medium">Sem dados</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -206,16 +230,22 @@
                         </div>
                     </div>
                     
-                    <div class="relative flex-grow min-h-[200px]">
+                    <div class="relative flex-grow min-h-[200px] flex flex-col justify-center">
                         <canvas id="chartIdade"></canvas>
+                        <div id="empty-chartIdade" class="hidden absolute inset-0 flex-col items-center justify-center bg-slate-50/80 rounded-lg border border-dashed border-slate-200 z-10">
+                            <span class="text-xs text-slate-400 font-medium">Nenhuma faixa etária mapeada</span>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Geografia: Municípios -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 lg:col-span-3">
                     <h3 class="text-md font-bold text-slate-700 mb-4">Alcance Geográfico (Municípios)</h3>
-                    <div class="relative h-[350px]">
+                    <div class="relative h-[350px] flex flex-col justify-center">
                         <canvas id="chartMunicipios"></canvas>
+                        <div id="empty-chartMunicipios" class="hidden absolute inset-0 flex-col items-center justify-center bg-slate-50/80 rounded-lg border border-dashed border-slate-200 z-10">
+                            <span class="text-sm text-slate-500 font-medium">Nenhum alcance geográfico encontrado</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -267,6 +297,22 @@
         const fPerfTipo = document.getElementById('perf-tipo');
         const fPerfConclusao = document.getElementById('perf-conclusao');
         const fPerfGenero = document.getElementById('perf-genero');
+
+        // Event Listeners: Dropdown de Configurações do CSV
+        const btnUploadConfig = document.getElementById('btn-upload-config');
+        const dropdownConfig = document.getElementById('dropdown-config');
+
+        btnUploadConfig.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita que o clique feche o menu imediatamente
+            dropdownConfig.classList.toggle('hidden');
+        });
+
+        // Fecha o dropdown se o usuário clicar em qualquer outro lugar da tela
+        document.addEventListener('click', (e) => {
+            if (!dropdownConfig.contains(e.target) && !btnUploadConfig.contains(e.target)) {
+                dropdownConfig.classList.add('hidden');
+            }
+        });
         
         // Event Listeners dos Filtros
         document.querySelectorAll('.global-filter, .local-filter-op, .local-filter-perf').forEach(el => {
@@ -318,20 +364,24 @@
          */
         function switchTab(tabId) {
             currentTab = tabId;
-            // Esconde todos os conteúdos e desativa estilo visual de todas as abas
+            // Esconde todos os conteúdos
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            // Remove o estilo ativo de TODAS as abas e devolve o estilo inativo
             document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('active-tab', 'border-blue-500', 'text-blue-600');
-                el.classList.add('border-transparent', 'text-slate-500');
+                el.classList.remove('active-tab', 'border-blue-800', 'text-blue-900', 'bg-blue-50', 'font-semibold');
+                el.classList.add('border-transparent', 'text-slate-500', 'font-medium');
             });
             
-            // Ativa a aba clicada
+            // Revela a aba clicada
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            
+            // Aplica o novo estilo corporativo à aba clicada
             const activeBtn = document.getElementById(`nav-${tabId}`);
-            activeBtn.classList.remove('border-transparent', 'text-slate-500');
-            activeBtn.classList.add('active-tab', 'border-blue-500', 'text-blue-600');
+            activeBtn.classList.remove('border-transparent', 'text-slate-500', 'font-medium');
+            activeBtn.classList.add('active-tab', 'border-blue-800', 'text-blue-900', 'bg-blue-50', 'font-semibold');
 
-            // Renderiza apenas os dados da aba atual (Performance)
+            // Renderiza apenas os dados da aba atual
             renderizarDashboard();
         }
 
@@ -430,19 +480,19 @@
          * Orquestra qual aba está aberta e aplica os filtros correspondentes
          */
         function renderizarDashboard() {
-            // 6.1 Pega valores dos Filtros Globais
+            // Aplica as cores nos filtros selecionados
+            atualizarEstilosFiltros(); 
+
             const vAno = fGlobalAno.value;
             const vMes = fGlobalMes.value;
             const vMuni = fGlobalMuni.value;
 
-            // 6.2 Aplica Filtro Global na Base de Dados
             const baseGlobalFiltrada = globalAtendimentos.filter(d => {
                 return (vAno === "ALL" || d.ano === vAno) &&
                        (vMes === "ALL" || d.mes === vMes) &&
                        (vMuni === "ALL" || d.municipio === vMuni);
             });
 
-            // 6.3 Direciona o processamento visual baseado na aba ativa
             if (currentTab === 'geral') {
                 renderizarAbaGeral(baseGlobalFiltrada, vAno, vMes);
             } else if (currentTab === 'operacional') {
@@ -454,10 +504,8 @@
 
         /** ================= ABA 1: GERAL ================= */
         function renderizarAbaGeral(dados, vAno, vMes) {
-            // Conta IDs únicos para evitar duplicar KPIs de pessoas que fizeram múltiplos serviços
             const countUnique = (arr) => new Set(arr.map(d => d.idLinha)).size;
             
-            // Calcula folhas sem duplicar
             let folhasTotais = 0;
             const linhasContadas = new Set();
             dados.forEach(d => {
@@ -470,19 +518,15 @@
             const atualPessoas = countUnique(dados);
             const atualMEIs = countUnique(dados.filter(d => d.categoria === 'Abertura de MEI' || d.categoria === 'DASN MEI'));
 
-            // Exibe os números absolutos
             document.getElementById('kpi-total').innerText = atualPessoas;
             document.getElementById('kpi-mei').innerText = atualMEIs;
             document.getElementById('kpi-folhas').innerText = folhasTotais;
 
-            // Lógica de Crescimento (MoM/YoY)
             calcularEExibirCrescimento(vAno, vMes, atualPessoas, atualMEIs, folhasTotais);
 
-            // Gráfico de Evolução (Linha)
             const contagemData = {};
             dados.forEach(d => {
                 if(d.dataStr === "Data Indefinida") return;
-                // Conta apenas pessoas únicas por dia
                 if(!contagemData[d.dataStr]) contagemData[d.dataStr] = new Set();
                 contagemData[d.dataStr].add(d.idLinha);
             });
@@ -494,7 +538,12 @@
             });
             const valores = labels.map(l => contagemData[l].size);
 
-            criarGrafico('chartEvolucao', 'line', labels, valores, 'Pessoas Atendidas por Dia', '#10b981', true);
+            // Trava de Gráfico Vazio
+            const temEvolucao = valores.length > 0;
+            toggleEmptyState('chartEvolucao', temEvolucao);
+            if (temEvolucao) {
+                criarGrafico('chartEvolucao', 'line', labels, valores, 'Pessoas Atendidas por Dia', '#0284c7', true);
+            }
         }
 
         // Função de Apoio para Crescimento Temporal
@@ -560,27 +609,24 @@
 
         /** ================= ABA 2: OPERACIONAL ================= */
         function renderizarAbaOperacional(dadosGlobais) {
-            // Aplica Filtro Local
             const vConclusao = fOpConclusao.value;
             const dadosLocais = dadosGlobais.filter(d => vConclusao === "ALL" || d.conclusivo.includes(vConclusao));
 
             let labels = [], valores = [];
 
             if (!viewSubcategorias) {
-                // VISÃO MACRO CATEGORIA
                 const contagem = Object.keys(categoriasDicionario).reduce((acc, curr) => ({...acc, [curr]: 0}), {});
                 dadosLocais.forEach(d => { if(contagem[d.categoria] !== undefined) contagem[d.categoria]++; });
                 
                 labels = Object.keys(contagem);
                 valores = Object.values(contagem);
                 
-                // MUDANÇA: O Gráfico Macro agora também é Horizontal ('y')
-                criarGrafico('chartCategorias', 'bar', labels, valores, 'Volume', '#3b82f6', false, 'y');
-            } else {
-                // VISÃO APENAS "OUTROS"
-                const contagemOutros = {};
+                const temCat = valores.some(v => v > 0);
+                toggleEmptyState('chartCategorias', temCat);
+                if (temCat) criarGrafico('chartCategorias', 'bar', labels, valores, 'Volume', '#2563eb', false, 'y');
                 
-                // Isola a base de dados apenas para quem caiu em "Outros"
+            } else {
+                const contagemOutros = {};
                 const apenasOutros = dadosLocais.filter(d => d.categoria === "Outros");
                 
                 apenasOutros.forEach(d => {
@@ -594,18 +640,18 @@
                 let topSubs = sortedOutros.slice(0, topN);
                 let demaisCount = sortedOutros.slice(topN).reduce((acc, curr) => acc + curr[1], 0);
                 
-                // MUDANÇA: Manda o texto 100% completo, o gráfico se vira para cortar visualmente
                 labels = topSubs.map(item => item[0]); 
                 valores = topSubs.map(item => item[1]);
                 if (demaisCount > 0) { labels.push("DEMAIS ITENS EM OUTROS"); valores.push(demaisCount); }
 
-                criarGrafico('chartCategorias', 'bar', labels, valores, 'Volume', '#8b5cf6', false, 'y');
+                const temCat = valores.length > 0;
+                toggleEmptyState('chartCategorias', temCat);
+                if (temCat) criarGrafico('chartCategorias', 'bar', labels, valores, 'Volume', '#4f46e5', false, 'y');
             }
         }
 
         /** ================= ABA 3: PERFIL ================= */
         function renderizarAbaPerfil(dadosGlobais) {
-            // Aplica Filtros Locais Exclusivos
             const vServ = fPerfServico.value;
             const vTipo = fPerfTipo.value;
             const vConclusao = fPerfConclusao.value;
@@ -618,7 +664,6 @@
                        (vGenero === "ALL" || d.sexo.includes(vGenero));
             });
 
-            // Conta IDs únicos para não distorcer a média se a pessoa fez múltiplos serviços
             const idadesUnicas = {};
             dadosLocais.forEach(d => {
                 if (d.idadeNumero > 0 && !idadesUnicas[d.idLinha]) {
@@ -633,30 +678,32 @@
 
             // 1. Gráfico Gênero (Pie)
             let masc = 0, fem = 0;
-            // Cria um agrupador para garantir que cada pessoa seja contada apenas uma vez
             const generoPorPessoa = {};
             dadosLocais.forEach(d => {
                 if (!generoPorPessoa[d.idLinha]) {
                     generoPorPessoa[d.idLinha] = d.sexo;
                 }
             });
-            // Soma os gêneros baseando-se apenas nos indivíduos únicos
             Object.values(generoPorPessoa).forEach(sexo => {
                 if(sexo.includes('MASCULINO')) masc++;
                 else if(sexo.includes('FEMININO')) fem++;
             });
             
-            criarGraficoPizza('chartGenero', ['Masculino', 'Feminino'], [masc, fem], ['#3b82f6', '#ec4899']);
+            const temGenero = masc > 0 || fem > 0;
+            toggleEmptyState('chartGenero', temGenero);
+            if (temGenero) criarGraficoPizza('chartGenero', ['Masculino', 'Feminino'], [masc, fem], ['#2563eb', '#0ea5e9']);
 
             // 2. Gráfico Idade (Bar)
             const mapIdade = {"Até 25":0, "26 a 40":0, "41 a 60":0, "Acima de 60":0, "Não Informado":0};
-            // Conta IDs para não duplicar se a pessoa marcou vários serviços
             const idadePorPessoa = {}; 
             dadosLocais.forEach(d => {
                 if(!idadePorPessoa[d.idLinha]) idadePorPessoa[d.idLinha] = d.idadeFaixa;
             });
             Object.values(idadePorPessoa).forEach(faixa => { if(mapIdade[faixa] !== undefined) mapIdade[faixa]++; });
-            criarGrafico('chartIdade', 'bar', Object.keys(mapIdade), Object.values(mapIdade), 'Pessoas', '#6366f1', false);
+            
+            const temIdade = Object.values(mapIdade).some(v => v > 0);
+            toggleEmptyState('chartIdade', temIdade);
+            if (temIdade) criarGrafico('chartIdade', 'bar', Object.keys(mapIdade), Object.values(mapIdade), 'Pessoas', '#0d9488', false);
 
             // 3. Gráfico Município (Horizontal Bar)
             const muniComIds = {};
@@ -672,12 +719,56 @@
             const labelsMuni = sortedMuni.map(item => item[0].toLowerCase().replace(/(^\w|\s\w)/g, m => m.toUpperCase()));
             const valoresMuni = sortedMuni.map(item => item[1]);
             
-            criarGrafico('chartMunicipios', 'bar', labelsMuni, valoresMuni, 'Pessoas', '#f59e0b', false, 'y');
+            const temMuni = valoresMuni.length > 0;
+            toggleEmptyState('chartMunicipios', temMuni);
+            if (temMuni) criarGrafico('chartMunicipios', 'bar', labelsMuni, valoresMuni, 'Pessoas', '#475569', false, 'y');
         }
 
         /**
          * 7. UTILITÁRIOS (Helpers de Gráficos e Limpeza)
          */
+
+        function atualizarEstilosFiltros() {
+            // Pinta de índigo suave destacando os filtros que estão sendo usados
+            document.querySelectorAll('.global-filter, .local-filter-op, .local-filter-perf').forEach(el => {
+                if (el.value !== "ALL") {
+                    // Adiciona o tema Índigo ativo
+                    el.classList.add('bg-indigo-100', 'border-indigo-400', 'text-indigo-900', 'font-semibold');
+                    // Remove as cores padrão
+                    el.classList.remove('bg-blue-900', 'border-blue-700', 'text-white', 'bg-white', 'border-slate-300');
+                } else {
+                    // Remove o tema Índigo ativo
+                    el.classList.remove('bg-indigo-100', 'border-indigo-400', 'text-indigo-900', 'font-semibold');
+                    // Devolve as cores padrão dependendo de onde o filtro está
+                    if (el.classList.contains('global-filter')) {
+                        el.classList.add('bg-blue-900', 'border-blue-700', 'text-white');
+                    } else {
+                        el.classList.add('bg-white', 'border-slate-300');
+                    }
+                }
+            });
+        }
+
+        function toggleEmptyState(canvasId, hasData) {
+            const canvas = document.getElementById(canvasId);
+            const emptyDiv = document.getElementById(`empty-${canvasId}`);
+            if (!canvas || !emptyDiv) return;
+            
+            if (hasData) {
+                canvas.style.display = 'block';
+                emptyDiv.classList.add('hidden');
+                emptyDiv.classList.remove('flex');
+            } else {
+                canvas.style.display = 'none';
+                emptyDiv.classList.remove('hidden');
+                emptyDiv.classList.add('flex');
+                if(chartInstances[canvasId]) {
+                    chartInstances[canvasId].destroy(); // Destrói para evitar bugs visuais
+                    delete chartInstances[canvasId];
+                }
+            }
+        }
+
         function criarGrafico(canvasId, type, labels, data, dataLabel, color, isLine = false, indexAxis = 'x') {
             const ctx = document.getElementById(canvasId).getContext('2d');
             if(chartInstances[canvasId]) chartInstances[canvasId].destroy();
