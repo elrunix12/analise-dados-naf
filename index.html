@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen">
 
@@ -46,19 +47,23 @@
             <div class="flex items-center space-x-2 lg:space-x-4 flex-shrink-0">
                 <span id="file-name" class="text-xs text-blue-300 hidden md:block max-w-[150px] truncate"></span>
                 
-                <!-- Botão Principal de Carregar (Agora vem primeiro) -->
+                <!-- Botão de Mostrar Números -->
+                <button id="btn-toggle-labels" class="hidden p-2 bg-blue-800 hover:bg-blue-700 text-blue-200 hover:text-white rounded transition shadow-inner flex items-center justify-center" title="Mostrar Números nos Gráficos">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                </button>
+
+                <!-- Botão Principal de Carregar -->
                 <label for="csv-upload" class="cursor-pointer bg-blue-600 hover:bg-blue-500 transition px-4 py-2 rounded-md font-medium text-sm shadow-sm flex items-center">
                     <svg class="w-4 h-4 mr-2 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                     Carregar
                 </label>
                 <input id="csv-upload" type="file" accept=".csv" class="hidden" />
 
-                <!-- Botão de Configurações com Menu Suspenso (Agora à direita) -->
+                <!-- Botão de Configurações com Menu Suspenso -->
                 <div class="relative">
                     <button id="btn-upload-config" class="p-2 bg-blue-800 hover:bg-blue-700 text-blue-200 hover:text-white rounded transition shadow-inner flex items-center justify-center" title="Configurações do Arquivo">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </button>
-                    
                     <!-- Menu Dropdown (Oculto por padrão) -->
                     <div id="dropdown-config" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-50 border border-slate-200">
                         <div class="p-4 flex flex-col gap-2">
@@ -68,7 +73,6 @@
                                 <option value=",">Vírgula (,)</option>
                                 <option value=";">Ponto e Vírgula (;)</option>
                             </select>
-                            <p class="text-[10px] text-slate-400 leading-tight mt-1">Altere apenas se os gráficos apresentarem erro de leitura.</p>
                         </div>
                     </div>
                 </div>
@@ -207,13 +211,21 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                 <!-- Demografia: Gênero -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col">
-                    <h3 class="text-md font-bold text-slate-700 mb-4">Distribuição de Gênero</h3>
-                    <div class="relative flex-grow min-h-[200px] flex items-center justify-center">
-                        <canvas id="chartGenero"></canvas>
-                        <div id="empty-chartGenero" class="hidden absolute inset-0 flex-col items-center justify-center bg-slate-50/80 rounded-lg border border-dashed border-slate-200 z-10">
-                            <span class="text-xs text-slate-400 font-medium">Sem dados</span>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col h-full">
+                    <!-- Título fixo no topo -->
+                    <h3 class="text-md font-bold text-slate-700 mb-4 flex-shrink-0">Distribuição de Gênero</h3>
+                    
+                    <!-- Contêiner 1: Flexível (Ocupa o espaço vazio e centraliza tudo ao meio) -->
+                    <div class="flex-grow w-full flex flex-col items-center justify-center">
+                        
+                        <!-- Contêiner 2: Rígido (Trava o tamanho exato da pizza para o Chart.js não enlouquecer) -->
+                        <div class="relative w-full max-w-[240px] h-[240px]">
+                            <canvas id="chartGenero"></canvas>
+                            <div id="empty-chartGenero" class="hidden absolute inset-0 flex-col items-center justify-center bg-slate-50/80 rounded-lg border border-dashed border-slate-200 z-10">
+                                <span class="text-xs text-slate-400 font-medium">Sem dados</span>
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
                 
@@ -276,6 +288,20 @@
         let chartInstances = {}; // Armazena instâncias do Chart.js para destruição/atualização
         let currentTab = 'geral'; // Aba inicial
         let viewSubcategorias = false; // Controle de drill-down do gráfico Operacional
+        let mostrarNumeros = false;
+
+        // Registra o plugin de DataLabels e configura o layout
+        Chart.register(ChartDataLabels);
+        Chart.defaults.set('plugins.datalabels', {
+            color: '#475569',
+            font: { weight: 'bold', size: 11 },
+            align: 'end',
+            anchor: 'end',
+            formatter: Math.round,
+            display: function(context) { 
+                return mostrarNumeros && context.dataset.data[context.dataIndex] > 0; 
+            }
+        });
 
         /**
          * 3. ELEMENTOS DO DOM (Filtros e Botões)
@@ -312,6 +338,25 @@
             if (!dropdownConfig.contains(e.target) && !btnUploadConfig.contains(e.target)) {
                 dropdownConfig.classList.add('hidden');
             }
+        });
+
+        // NOVO: Event Listener do botão de Mostrar/Ocultar Números
+        const btnToggleLabels = document.getElementById('btn-toggle-labels');
+        
+        btnToggleLabels.addEventListener('click', () => {
+            mostrarNumeros = !mostrarNumeros;
+            
+            // Alterna a cor do ícone para dar feedback visual de "ativo" (amarelo) ou "inativo" (azul)
+            if (mostrarNumeros) {
+                btnToggleLabels.classList.replace('text-blue-200', 'text-yellow-300');
+                btnToggleLabels.classList.replace('hover:text-white', 'hover:text-yellow-100');
+            } else {
+                btnToggleLabels.classList.replace('text-yellow-300', 'text-blue-200');
+                btnToggleLabels.classList.replace('hover:text-yellow-100', 'hover:text-white');
+            }
+            
+            // Manda todos os gráficos se atualizarem para mostrar ou esconder os rótulos
+            Object.values(chartInstances).forEach(chart => chart.update('none'));
         });
         
         // Event Listeners dos Filtros
@@ -471,6 +516,7 @@
             dashboard.style.display = 'block';
             document.getElementById('global-filters-container').classList.remove('hidden');
             document.getElementById('global-filters-container').classList.add('flex'); // Ativa o layout flex
+            btnToggleLabels.classList.remove('hidden'); // MOSTRA O BOTÃO DE NÚMEROS
             
             renderizarDashboard();
         }
@@ -789,27 +835,35 @@
                     }]
                 },
                 options: {
+                    animation: false, // <-- Mantendo a animação desligada para o download
                     indexAxis: indexAxis, 
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    
+                    // 1. Cria um espaço invisível no topo e na direita do quadro
+                    layout: {
+                        padding: { top: 20, right: 35 } 
+                    },
+                    
                     plugins: { 
                         legend: { display: false },
                         tooltip: {
                             callbacks: {
-                                // Garante que a caixa preta de hover mostre o nome GIGANTE inteiro
-                                title: function(context) {
-                                    return context[0].label;
-                                }
+                                title: function(context) { return context[0].label; }
                             }
                         }
                     },
                     scales: { 
-                        [indexAxis === 'x' ? 'y' : 'x']: { beginAtZero: true, ticks: { precision: 0 } },
+                        // 2. Estica a régua do gráfico em 10% além da maior barra
+                        [indexAxis === 'x' ? 'y' : 'x']: { 
+                            beginAtZero: true, 
+                            grace: '10%', 
+                            ticks: { precision: 0 } 
+                        },
                         [indexAxis === 'x' ? 'x' : 'y']: { 
                             ticks: {
-                                // O grande truque: corta visualmente o eixo para não estourar a tela
                                 callback: function(value) {
                                     const label = this.getLabelForValue(value) || '';
-                                    // Se for horizontal (y) dá espaço para 45 caracteres, se for vertical (x) corta com 15
                                     const limite = indexAxis === 'y' ? 45 : 15;
                                     return label.length > limite ? label.substring(0, limite) + '...' : label;
                                 }
@@ -829,7 +883,25 @@
                     labels: labels,
                     datasets: [{ data: data, backgroundColor: colors, borderWidth: 0 }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { position: 'bottom' } } }
+                options: { 
+                    animation: false, // Mantém desligado para o download
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    cutout: '60%', // Diminuí um pouco o buraco do meio para caber números maiores
+                    layout: { 
+                        padding: 20 // Dá um "respiro" em volta da pizza inteira
+                    },
+                    plugins: { 
+                        legend: { position: 'bottom' },
+                        // REGRA ESPECÍFICA SÓ PARA A PIZZA:
+                        datalabels: {
+                            color: '#ffffff', // Número em branco para dar contraste
+                            anchor: 'center', // Puxa o número para DENTRO da fatia
+                            align: 'center',
+                            font: { weight: 'bold', size: 14 }
+                        }
+                    } 
+                }
             });
         }
 
