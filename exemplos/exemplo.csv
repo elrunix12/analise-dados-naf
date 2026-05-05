@@ -99,3 +99,103 @@ Carimbo de data/hora;NOME DO CONTRIBUINTE;CPF;Data de Atendimento;Tipo de usuár
 09/11/2023 17:00:00;Fernanda Alves 97;224.586.549-51;09/11/2023;Pessoa Jurídica;Sim;Declaração de MEI;;;2;25;FEMININO;Volta Redonda
 06/03/2023 09:31:00;Pedro Santos 98;424.437.412-63;06/03/2023;Pessoa Jurídica;Não;Declaração de MEI;;;1;19;FEMININO;Porto Real
 20/11/2023 13:34:00;Carlos Souza 99;183.904.798-62;20/11/2023;Pessoa Física;Sim;Compensação de Multa;;;0;29;FEMININO;Volta Redonda
+15/07/2024 10:21:00;Igor Souza;878.906.536-54;15/07/2024;Pessoa Física;Não;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;0;42;MASCULINO;Barra Mansa
+07/01/2025 16:49:00;Bruno Ferreira;164.507.973-58;07/01/2025;Pessoa Física;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;1;64;FEMININO;Quatis
+03/10/2025 14:02:00;Igor Silva;249.497.100-34;03/10/2025;Pessoa Física;Sim;Abertura de MEI, Outro:;12;;10;56;MASCULINO;Quatis
+06/07/2024 14:40:00;Igor Silva;908.435.597-90;06/07/2024;Pessoa Jurídica;Sim;Abertura de MEI;;;1;66;FEMININO;Barra Mansa
+27/12/2023 11:34:00;Eduardo Alves;461.350.606-25;27/12/2023;Pessoa Física;Sim;Emissão de DARF;;;1;25;FEMININO;Porto Real
+12/06/2024 10:24:00;Gabriel Silva;378.167.319-58;12/06/2024;Pessoa Física;Sim;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;0;31;FEMININO;Resende
+24/02/2023 17:35:00;Julia Santos;469.761.503-49;24/02/2023;Pessoa Jurídica;Não;Outro:;senha do ecac;;2;65;FEMININO;Porto Real
+26/04/2025 10:04:00;Carlos Alves;490.871.306-69;26/04/2025;Pessoa Jurídica;Sim;Declaração de MEI;;;0;41;MASCULINO;Resende
+16/09/2025 08:35:00;Gabriel Ferreira;189.620.354-99;16/09/2025;Pessoa Física;Sim;Abertura de MEI, Outro:;irpf 2024;;2, 3;21;FEMININO;Volta Redonda
+22/10/2025 11:32:00;Ana Alves;926.312.191-49;22/10/2025;Pessoa Física;Sim;Abertura de MEI, Outro:;RETIFICADORA;;2;68;FEMININO;Porto Real
+20/07/2024 08:08:00;Carlos Santos;124.908.410-18;20/07/2024;Pessoa Física;Sim;Abertura de MEI, Outro:;irpf 2024;;0;49;MASCULINO;Itatiaia
+13/11/2024 08:08:00;Eduardo Ferreira;245.541.670-68;13/11/2024;Pessoa Física;Sim;Abertura de MEI;;;2;22;MASCULINO;Barra Mansa
+08/04/2024 11:36:00;Carlos Souza;329.805.101-70;08/04/2024;Pessoa Jurídica;Sim;Outro:;12;;2;68;FEMININO;Barra Mansa
+17/04/2026 12:47:00;Igor Silva;644.205.109-84;17/04/2026;Pessoa Jurídica;Não;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;0;22;FEMININO;Resende
+08/08/2024 14:14:00;Gabriel Santos;861.439.113-14;08/08/2024;Pessoa Física;Sim;Abertura de MEI, Outro:;-;;0;40;MASCULINO;Porto Real
+10/05/2025 12:12:00;Bruno Alves;719.646.666-40;10/05/2025;Pessoa Física;Sim;Emissão de DARF;;;1;36;MASCULINO;Quatis
+03/12/2025 15:52:00;Ana Alves;846.108.649-65;03/12/2025;Pessoa Jurídica;Sim;Emissão de DARF;;;0;53;MASCULINO;Quatis
+12/01/2023 11:29:00;Daniela Lima;455.104.997-71;12/01/2023;Pessoa Física;Sim;Abertura de MEI;;;10;60;FEMININO;Volta Redonda
+05/11/2024 10:48:00;Igor Ferreira;333.159.208-11;05/11/2024;Pessoa Jurídica;Sim;Abertura de MEI, Outro:;-;;0;74;MASCULINO;Resende
+17/04/2024 14:39:00;Helena Costa;429.620.354-94;17/04/2024;Pessoa Jurídica;Sim;Outro:;MEU INSS;;1;27;FEMININO;Resende
+08/07/2025 09:12:00;Eduardo Santos;223.167.925-50;08/07/2025;Pessoa Jurídica;Sim;Abertura de MEI, Outro:;NADA;;10;34;MASCULINO;Porto Real
+12/09/2025 11:15:00;Ana Silva;538.749.191-10;12/09/2025;Pessoa Física;Sim;Declaração de MEI;;;1;25;FEMININO;Quatis
+15/12/2024 09:15:00;Bruno Souza;579.940.671-86;15/12/2024;Pessoa Física;Sim;Abertura de MEI;;;2;68;MASCULINO;Itatiaia
+12/11/2024 17:34:00;Ana Silva;180.457.973-22;12/11/2024;Pessoa Física;Sim;Outro:;Conta Ouro no Gov;;0;75;FEMININO;Resende
+24/09/2024 09:11:00;Ana Silva;470.932.146-51;24/09/2024;Pessoa Jurídica;Sim;Outro:;12;;0;56;MASCULINO;Volta Redonda
+22/02/2026 08:34:00;Julia Ferreira;576.840.407-39;22/02/2026;Pessoa Física;Sim;Outro:;-;;2;46;MASCULINO;Quatis
+18/02/2026 09:59:00;Fernanda Alves;768.618.361-94;18/02/2026;Pessoa Física;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;0;33;FEMININO;Barra Mansa
+24/03/2024 14:14:00;Daniela Lima;899.709.824-78;24/03/2024;Pessoa Jurídica;Sim;Abertura de MEI, Outro:;SICALC;;0;18;MASCULINO;Resende
+04/05/2024 17:09:00;Gabriel Santos;897.669.589-98;04/05/2024;Pessoa Jurídica;Sim;Abertura de MEI, Outro:;SICALC;;1;47;FEMININO;Quatis
+15/09/2025 17:50:00;Eduardo Oliveira;213.116.892-26;15/09/2025;Pessoa Física;Sim;Outro:;COMPENSAÇÃO IR;;0;73;MASCULINO;Quatis
+13/11/2025 15:39:00;Daniela Souza;992.839.297-76;13/11/2025;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;0;45;MASCULINO;Porto Real
+26/02/2025 15:31:00;Igor Silva;617.808.572-88;26/02/2025;Pessoa Física;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;1;66;FEMININO;Barra Mansa
+03/12/2025 13:06:00;Helena Lima;891.733.911-37;03/12/2025;Pessoa Física;Sim;Abertura de MEI, Outro:;irpf 2024;;2, 3;21;FEMININO;Itatiaia
+12/12/2025 13:14:00;Ana Costa;186.136.972-27;12/12/2025;Pessoa Jurídica;Sim;Abertura de MEI, Outro:;GOV PRATA;;0;34;MASCULINO;Volta Redonda
+22/02/2026 15:47:00;Bruno Ferreira;779.622.784-75;22/02/2026;Pessoa Jurídica;Sim;Abertura de MEI;;;10;51;MASCULINO;Resende
+24/09/2024 15:44:00;Daniela Costa;790.347.165-88;24/09/2024;Pessoa Jurídica;Sim;Abertura de MEI, Outro:;-;;0;73;FEMININO;Quatis
+03/05/2026 12:49:00;Carlos Silva;544.739.384-51;03/05/2026;Pessoa Física;Sim;Emissão de DARF;;;1;52;FEMININO;Resende
+26/06/2024 16:30:00;Ana Souza;635.474.340-96;26/06/2024;Pessoa Física;Sim;Abertura de MEI, Outro:;RETIFICADORA;;2;70;MASCULINO;Porto Real
+06/07/2024 09:27:00;Eduardo Santos;777.925.322-29;06/07/2024;Pessoa Física;Sim;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;1;23;MASCULINO;Itatiaia
+17/05/2025 15:39:00;Igor Silva;112.923.635-47;17/05/2025;Pessoa Física;Sim;Abertura de MEI;;;0;39;MASCULINO;Resende
+23/07/2026 12:46:00;Fernanda Costa;957.514.931-15;23/07/2026;Pessoa Jurídica;Sim;Abertura de MEI, Outro:;RETIFICADORA;;0;60;MASCULINO;Volta Redonda
+24/07/2023 15:56:00;Fernanda Costa;911.758.324-43;24/07/2023;Pessoa Física;Sim;Abertura de MEI, Outro:;irpf 2024;;2;57;MASCULINO;Resende
+26/11/2024 14:15:00;Ana Silva;428.328.783-60;26/11/2024;Pessoa Física;Sim;Declaração de MEI;;;1 até 5;53;MASCULINO;Quatis
+28/11/2023 15:58:00;Fernanda Santos;346.885.513-43;28/11/2023;Pessoa Jurídica;Sim;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;0;45;MASCULINO;Barra Mansa
+11/02/2025 16:04:00;Eduardo Alves;445.696.867-63;11/02/2025;Pessoa Física;Sim;Emissão de DARF;;;1 até 5;55;FEMININO;Porto Real
+03/12/2025 15:38:00;Julia Ferreira;710.222.846-95;03/12/2025;Pessoa Física;Não;Abertura de MEI, Outro:;12;;5;54;MASCULINO;Quatis
+03/05/2026 15:33:00;Ana Ferreira;993.414.733-40;03/05/2026;Pessoa Física;Não;Outro:;RETIFICADORA;;10;38;MASCULINO;Resende
+17/04/2024 17:35:00;Fernanda Alves;119.539.849-21;17/04/2024;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;1;69;MASCULINO;Barra Mansa
+25/11/2025 11:37:00;Fernanda Alves;838.483.565-38;25/11/2025;Pessoa Física;Sim;Abertura de MEI;;;0;29;FEMININO;Resende
+16/11/2025 09:27:00;Julia Santos;413.567.892-23;16/11/2025;Pessoa Jurídica;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;3;38;FEMININO;Itatiaia
+04/09/2025 11:15:00;Carlos Silva;512.986.353-81;04/09/2025;Pessoa Física;Sim;Emissão de DARF;;;5;74;MASCULINO;Volta Redonda
+16/09/2023 15:19:00;Gabriel Silva;316.539.273-77;16/09/2023;Pessoa Física;Sim;Declaração de MEI;;;0;31;MASCULINO;Resende
+08/04/2026 10:48:00;Daniela Santos;870.395.731-31;08/04/2026;Pessoa Física;Não;Emissão de DARF;;;1;57;MASCULINO;Quatis
+16/06/2025 16:47:00;Daniela Lima;817.375.295-88;16/06/2025;Pessoa Física;Não;Outro:;senha do ecac;;3;46;MASCULINO;Quatis
+28/11/2023 11:03:00;Bruno Silva;774.223.364-58;28/11/2023;Pessoa Física;Sim;Abertura de MEI;;;1;41;MASCULINO;Volta Redonda
+22/08/2024 16:51:00;Igor Alves;581.332.992-62;22/08/2024;Pessoa Jurídica;Não;Declaração de MEI;;;3;51;FEMININO;Resende
+11/02/2025 14:15:00;Gabriel Costa;634.331.603-53;11/02/2025;Pessoa Física;Não;Abertura de MEI;;;5;51;MASCULINO;Resende
+26/02/2025 09:21:00;Carlos Alves;430.404.795-15;26/02/2025;Pessoa Jurídica;Não;Outro:;BAIXA DE CNPJ;;0;57;FEMININO;Barra Mansa
+08/01/2024 09:34:00;Bruno Santos;551.996.182-41;08/01/2024;Pessoa Física;Sim;Abertura de MEI, Outro:;irpf 2024;;2;54;MASCULINO;Itatiaia
+13/11/2023 10:42:00;Carlos Alves;409.845.890-50;13/11/2023;Pessoa Física;Sim;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;0;22;FEMININO;Resende
+26/02/2026 09:12:00;Igor Costa;469.721.233-14;26/02/2026;Pessoa Física;Sim;Emissão de DARF;;;10;56;MASCULINO;Volta Redonda
+10/08/2026 12:44:00;Carlos Souza;837.288.941-86;10/08/2026;Pessoa Jurídica;Sim;Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF;;;1;25;MASCULINO;Volta Redonda
+10/03/2025 15:42:00;Daniela Lima;195.426.657-30;10/03/2025;Pessoa Jurídica;Sim;Abertura de MEI;;;0;31;FEMININO;Volta Redonda
+25/11/2026 12:47:00;Ana Souza;967.625.688-66;25/11/2026;Pessoa Jurídica;Não;Abertura de MEI, Outro:;irpf 2024;;0;48;FEMININO;Resende
+27/12/2026 13:42:00;Helena Costa;414.938.647-75;27/12/2026;Pessoa Jurídica;Sim;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;2;67;MASCULINO;Resende
+08/01/2025 15:02:00;Eduardo Costa;255.452.126-72;08/01/2025;Pessoa Jurídica;Não;Abertura de MEI;;;3;39;MASCULINO;Porto Real
+12/03/2025 08:35:00;Ana Santos;350.569.231-18;12/03/2025;Pessoa Física;Sim;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;3;51;MASCULINO;Quatis
+03/12/2024 16:53:00;Helena Alves;975.292.176-50;03/12/2024;Pessoa Física;Sim;Abertura de MEI, Outro:;NADA;;10;45;MASCULINO;Resende
+26/02/2025 15:15:00;Daniela Alves;208.530.134-29;26/02/2025;Pessoa Jurídica;Não;Outro:;COMPENSAÇÃO IR;;3;46;MASCULINO;Barra Mansa
+09/01/2024 09:23:00;Ana Ferreira;737.593.585-61;09/01/2024;Pessoa Física;Não;Abertura de MEI, Outro:;irpf 2024;;1;35;MASCULINO;Itatiaia
+13/11/2025 09:59:00;Bruno Silva;520.170.932-35;13/11/2025;Pessoa Jurídica;Sim;Declaração de MEI;;;0;64;MASCULINO;Resende
+25/11/2025 08:44:00;Igor Silva;291.684.568-15;25/11/2025;Pessoa Jurídica;Sim;Outro:;2023;;1 até 5;58;MASCULINO;Resende
+01/10/2026 12:45:00;Daniela Alves;734.908.431-29;01/10/2026;Pessoa Jurídica;Sim;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;2;60;MASCULINO;Quatis
+12/01/2024 14:05:00;Carlos Silva;921.284.148-52;12/01/2024;Pessoa Física;Sim;Emissão de DARF;;;1;58;FEMININO;Porto Real
+06/05/2024 17:34:00;Gabriel Silva;386.130.686-29;06/05/2024;Pessoa Jurídica;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;0;58;MASCULINO;Volta Redonda
+26/06/2025 08:34:00;Fernanda Ferreira;205.748.169-23;26/06/2025;Pessoa Física;Sim;Abertura de MEI;;;1 até 5;43;FEMININO;Quatis
+28/01/2025 15:59:00;Bruno Costa;442.274.659-19;28/01/2025;Pessoa Jurídica;Sim;Abertura de MEI, Outro:;SICALC;;0;29;FEMININO;Resende
+16/09/2025 14:12:00;Helena Alves;355.859.397-59;16/09/2025;Pessoa Jurídica;Sim;Abertura de MEI, Outro:;12;;0;30;MASCULINO;Resende
+04/09/2025 17:15:00;Fernanda Costa;957.511.238-66;04/09/2025;Pessoa Jurídica;Sim;Emissão de DARF;;;0;38;MASCULINO;Itatiaia
+20/07/2024 11:27:00;Helena Souza;382.203.203-88;20/07/2024;Pessoa Física;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;0;40;MASCULINO;Resende
+17/04/2025 10:48:00;Bruno Silva;302.261.213-94;17/04/2025;Pessoa Jurídica;Sim;Outro:;COMPENSAÇÃO IR;;3;54;MASCULINO;Barra Mansa
+03/10/2025 15:07:00;Fernanda Silva;465.178.694-82;03/10/2025;Pessoa Jurídica;Sim;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;0;56;MASCULINO;Volta Redonda
+17/04/2025 12:47:00;Ana Ferreira;523.597.439-50;17/04/2025;Pessoa Jurídica;Sim;Declaração de MEI;;;10;57;MASCULINO;Resende
+24/09/2026 12:28:00;Ana Silva;112.981.828-59;24/09/2026;Pessoa Jurídica;Sim;Outro:;parcelamento de darf;;1;45;MASCULINO;Itatiaia
+17/05/2026 10:14:00;Carlos Silva;548.865.250-93;17/05/2026;Pessoa Física;Não;Outro:;Conta Ouro no Gov;;0;72;FEMININO;Porto Real
+10/05/2026 10:24:00;Igor Silva;465.275.256-43;10/05/2026;Pessoa Física;Sim;Declaração de MEI;;;2;21;FEMININO;Itatiaia
+03/10/2023 15:39:00;Daniela Souza;183.167.330-80;03/10/2023;Pessoa Física;Sim;Abertura de MEI, Outro:;irpf 2024;;1;25;FEMININO;Resende
+25/11/2026 11:21:00;Gabriel Ferreira;147.288.756-11;25/11/2026;Pessoa Física;Não;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;1;69;FEMININO;Porto Real
+12/09/2026 09:35:00;Bruno Silva;376.136.257-23;12/09/2026;Pessoa Jurídica;Não;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;1 até 5;66;MASCULINO;Barra Mansa
+11/02/2024 16:53:00;Carlos Costa;382.722.569-80;11/02/2024;Pessoa Física;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;0;35;FEMININO;Quatis
+28/01/2025 08:08:00;Ana Alves;926.171.187-57;28/01/2025;Pessoa Física;Sim;Emissão de DARF;;;1;52;FEMININO;Itatiaia
+23/07/2024 16:40:00;Bruno Ferreira;795.748.242-70;23/07/2024;Pessoa Jurídica;Sim;Outro:;.;;1;58;FEMININO;Volta Redonda
+22/10/2026 09:40:00;Carlos Souza;372.484.773-41;22/10/2026;Pessoa Jurídica;Sim;Abertura de MEI, Outro:;NADA;;2, 3;58;MASCULINO;Itatiaia
+12/06/2025 10:24:00;Ana Costa;111.455.539-75;12/06/2025;Pessoa Física;Sim;Abertura de MEI, Outro:;SICALC;;1;48;FEMININO;Barra Mansa
+13/11/2026 13:41:00;Bruno Silva;895.193.303-34;13/11/2026;Pessoa Física;Sim;Abertura de MEI, Outro:;12;;1;60;MASCULINO;Itatiaia
+28/11/2025 15:55:00;Carlos Alves;704.887.892-23;28/11/2025;Pessoa Física;Não;Abertura de MEI, Outro:;2023;;1;34;MASCULINO;Resende
+17/04/2025 14:02:00;Helena Costa;411.399.712-42;17/04/2025;Pessoa Jurídica;Sim;Declaração Anual ou Retificadora e informação sobre IRPF;;;1;35;MASCULINO;Porto Real
+12/11/2024 09:27:00;Julia Santos;920.671.300-34;12/11/2024;Pessoa Jurídica;Sim;Outro:;RETIFICADORA;;5;69;MASCULINO;Porto Real
+12/01/2026 09:12:00;Eduardo Santos;205.811.599-23;12/01/2026;Pessoa Física;Não;Emissão de DARF, Declaração Anual ou Retificadora e informação sobre IRPF;;;0;35;FEMININO;Barra Mansa
+17/04/2025 14:14:00;Daniela Santos;115.350.590-70;17/04/2025;Pessoa Física;Sim;Abertura de MEI, Outro:;irpf 2024;;2;54;MASCULINO;Resende
