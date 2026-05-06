@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard NAF - Analytics Center</title>
     
-    <!-- Bibliotecas Externas -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -13,17 +12,14 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen">
 
-    <!-- CABEÇALHO COM FILTROS INTEBRADOS -->
     <header class="bg-blue-900 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-3 flex flex-col lg:flex-row justify-between items-center gap-4">
             
-            <!-- Esquerda: Títulos -->
             <div class="flex-shrink-0 text-center lg:text-left">
                 <h1 class="text-xl font-bold">Dashboard Analítico NAF</h1>
                 <p class="text-xs text-blue-200">Processamento Local • LGPD</p>
             </div>
 
-            <!-- Centro: Filtros Globais (Ocultos até carregar o arquivo) -->
             <div id="global-filters-container" class="hidden flex-grow justify-center items-center">
                 <div class="flex flex-wrap justify-center items-center gap-2 bg-blue-800/50 px-3 py-1.5 rounded-lg border border-blue-700/50 shadow-inner">
                     <select id="filter-ano" class="bg-blue-900 border border-blue-700 text-white text-sm rounded focus:ring-2 focus:ring-blue-400 p-1.5 global-filter outline-none cursor-pointer">
@@ -43,28 +39,23 @@
                 </div>
             </div>
 
-            <!-- Direita: Botão de Upload e Configurações -->
-            <div class="flex items-center space-x-2 lg:space-x-4 flex-shrink-0">
+            <div id="upload-container" class="flex items-center space-x-2 lg:space-x-4 flex-shrink-0">
                 <span id="file-name" class="text-xs text-blue-300 hidden md:block max-w-[150px] truncate"></span>
                 
-                <!-- Botão de Mostrar Números -->
                 <button id="btn-toggle-labels" class="hidden p-2 bg-blue-800 hover:bg-blue-700 text-blue-200 hover:text-white rounded transition shadow-inner flex items-center justify-center" title="Mostrar Números nos Gráficos">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                 </button>
 
-                <!-- Botão Principal de Carregar -->
                 <label for="csv-upload" class="cursor-pointer bg-blue-600 hover:bg-blue-500 transition px-4 py-2 rounded-md font-medium text-sm shadow-sm flex items-center">
                     <svg class="w-4 h-4 mr-2 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                     Carregar
                 </label>
                 <input id="csv-upload" type="file" accept=".csv" class="hidden" />
 
-                <!-- Botão de Configurações com Menu Suspenso -->
                 <div class="relative">
                     <button id="btn-upload-config" class="p-2 bg-blue-800 hover:bg-blue-700 text-blue-200 hover:text-white rounded transition shadow-inner flex items-center justify-center" title="Configurações do Arquivo">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </button>
-                    <!-- Menu Dropdown (Oculto por padrão) -->
                     <div id="dropdown-config" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-50 border border-slate-200">
                         <div class="p-4 flex flex-col gap-2">
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Formato do CSV</label>
@@ -77,21 +68,19 @@
                     </div>
                 </div>
             </div>
-
-        </div>
+            </div>
     </header>
 
-    <!-- ESTADO VAZIO (Exibido antes do upload) -->
     <div id="empty-state" class="flex flex-col items-center justify-center mt-32">
-        <svg class="w-24 h-24 text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-        <h2 class="text-xl font-semibold text-slate-600">Nenhum dado processado</h2>
-        <p class="text-slate-400 text-sm mt-2">Faça o upload do seu CSV exportado do Google Forms para iniciar.</p>
+        <div id="empty-state-icon">
+            <svg class="w-24 h-24 text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        </div>
+        <h2 id="empty-state-title" class="text-xl font-semibold text-slate-600">Nenhum dado processado</h2>
+        <p id="empty-state-desc" class="text-slate-400 text-sm mt-2">Faça o upload do seu CSV exportado do Google Forms para iniciar.</p>
     </div>
 
-    <!-- CONTEÚDO PRINCIPAL (Exibido após o upload) -->
     <main class="container mx-auto px-6 py-6 hidden" id="dashboard-content">
 
-        <!-- NAVEGAÇÃO DAS ABAS (Centralizada) -->
         <div class="border-b border-slate-200 mb-6 flex justify-center px-4">
             <nav class="flex space-x-2 md:space-x-4" aria-label="Tabs">
                 <button onclick="switchTab('geral')" id="nav-geral" class="tab-btn active-tab border-blue-800 text-blue-900 bg-blue-50 rounded-t-lg whitespace-nowrap py-3 px-4 border-b-2 font-semibold text-sm transition-all">
@@ -106,11 +95,8 @@
             </nav>
         </div>
 
-        <!-- ABA 1: GERAL -->
         <div id="tab-geral" class="tab-content block">
-            <!-- KPI Cards -->
             <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <!-- KPI 1 -->
                 <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-blue-600 relative">
                     <h3 class="text-slate-500 text-sm font-semibold mb-1">Pessoas Atendidas</h3>
                     <div class="flex items-end gap-3">
@@ -119,7 +105,6 @@
                     </div>
                     <p class="text-xs text-slate-400 mt-2">Registros únicos na linha do tempo</p>
                 </div>
-                <!-- KPI 2 -->
                 <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-sky-500 relative">
                     <h3 class="text-slate-500 text-sm font-semibold mb-1">Pessoas Contribuintes MEI</h3>
                     <div class="flex items-end gap-3">
@@ -128,7 +113,6 @@
                     </div>
                     <p class="text-xs text-slate-400 mt-2">Demandaram Abertura ou DASN</p>
                 </div>
-                <!-- KPI 3 -->
                 <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm border-l-4 border-l-indigo-600 relative">
                     <h3 class="text-slate-500 text-sm font-semibold mb-1">Folhas Impressas</h3>
                     <div class="flex items-end gap-3">
@@ -139,7 +123,6 @@
                 </div>
             </section>
 
-            <!-- Gráfico Evolução -->
             <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 mb-8">
                 <h3 class="text-md font-bold text-slate-700 mb-4">Evolução Histórica de Atendimentos</h3>
                 <div class="relative h-80 w-full flex flex-col justify-center">
@@ -152,9 +135,7 @@
             </section>
         </div>
 
-        <!-- ABA 2: OPERACIONAL -->
         <div id="tab-operacional" class="tab-content hidden">
-            <!-- Filtro Local -->
             <div class="bg-slate-100 p-3 rounded-lg mb-6 flex gap-4 items-center">
                 <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Filtro Específico:</span>
                 <select id="op-conclusao" class="bg-white border border-slate-300 text-sm rounded focus:ring-blue-500 p-1.5 local-filter-op">
@@ -164,7 +145,6 @@
                 </select>
             </div>
 
-            <!-- Gráfico de Serviços -->
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 w-full mb-8">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-md font-bold text-slate-700">Volume de Serviços Prestados</h3>
@@ -182,15 +162,12 @@
             </div>
         </div>
 
-        <!-- ABA 3: PERFIL -->
         <div id="tab-perfil" class="tab-content hidden">
-            <!-- Filtros Locais da Aba Perfil -->
             <div class="bg-slate-100 p-3 rounded-lg mb-6 flex flex-wrap gap-4 items-center">
                 <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Cruzar Dados:</span>
                 <select id="perf-servico" class="bg-white border border-slate-300 text-sm rounded focus:ring-blue-500 p-1.5 local-filter-perf">
                     <option value="ALL">Serviço: Todos</option>
-                    <!-- Preenchido via JS -->
-                </select>
+                    </select>
                 <select id="perf-tipo" class="bg-white border border-slate-300 text-sm rounded focus:ring-blue-500 p-1.5 local-filter-perf">
                     <option value="ALL">Público: Todos</option>
                     <option value="PESSOA FÍSICA">Pessoa Física</option>
@@ -201,7 +178,6 @@
                     <option value="SIM">Conclusivo</option>
                     <option value="NÃO">Não Conclusivo</option>
                 </select>
-                <!-- Gênero -->
                 <select id="perf-genero" class="bg-white border border-slate-300 text-sm rounded focus:ring-blue-500 p-1.5 local-filter-perf">
                     <option value="ALL">Gênero: Todos</option>
                     <option value="MASCULINO">Masculino</option>
@@ -210,15 +186,11 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                <!-- Demografia: Gênero -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col h-full">
-                    <!-- Título fixo no topo -->
                     <h3 class="text-md font-bold text-slate-700 mb-4 flex-shrink-0">Distribuição de Gênero</h3>
                     
-                    <!-- Contêiner 1: Flexível (Ocupa o espaço vazio e centraliza tudo ao meio) -->
                     <div class="flex-grow w-full flex flex-col items-center justify-center">
                         
-                        <!-- Contêiner 2: Rígido (Trava o tamanho exato da pizza para o Chart.js não enlouquecer) -->
                         <div class="relative w-full max-w-[240px] h-[240px]">
                             <canvas id="chartGenero"></canvas>
                             <div id="empty-chartGenero" class="hidden absolute inset-0 flex-col items-center justify-center bg-slate-50/80 rounded-lg border border-dashed border-slate-200 z-10">
@@ -229,12 +201,10 @@
                     </div>
                 </div>
                 
-                <!-- Demografia: Faixa Etária (Com Badge de Média Integrado) -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 lg:col-span-2 flex flex-col">
                     <div class="flex justify-between items-start sm:items-center mb-4 gap-2">
                         <h3 class="text-md font-bold text-slate-700">Faixa Etária</h3>
                         
-                        <!-- Badge da Média de Idade -->
                         <div class="bg-indigo-50 border border-indigo-100 text-indigo-800 px-3 py-1.5 rounded-lg flex items-center shadow-sm shrink-0">
                             <span class="text-[10px] font-bold uppercase tracking-wider mr-2 opacity-80">Média:</span>
                             <span class="text-lg font-bold leading-none" id="kpi-media-idade">0</span>
@@ -250,7 +220,6 @@
                     </div>
                 </div>
                 
-                <!-- Geografia: Municípios -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 lg:col-span-3">
                     <h3 class="text-md font-bold text-slate-700 mb-4">Alcance Geográfico (Municípios)</h3>
                     <div class="relative h-[350px] flex flex-col justify-center">
@@ -264,10 +233,15 @@
         </div>
     </main>
 
-    <!-- ========================================== -->
-    <!-- MOTOR JAVASCRIPT                           -->
-    <!-- ========================================== -->
     <script>
+        // =========================================================================
+        // 🟢 EXPLICAÇÃO DA MUDANÇA JS 1: A CHAVE MESTRA
+        // É aqui que o usuário decide como vai usar o painel.
+        // false = usa com arquivo CSV carregado manualmente.
+        // true = puxa os dados automaticamente da aba atual do Google Sheets.
+        // =========================================================================
+        const USAR_GOOGLE_SHEETS = false;
+
         /**
          * 1. CONFIGURAÇÕES E DICIONÁRIOS
          * Regras de negócio para agrupamento de texto livre
@@ -282,15 +256,14 @@
         };
 
         /**
-         * 2. VARIÁVEIS DE ESTADO GLOBAL
+         * 2. VARIÁVEIS DE ESTADO GLOBAL E SETUP DE GRÁFICOS
          */
-        let globalAtendimentos = []; // Armazena todas as linhas validadas do CSV
-        let chartInstances = {}; // Armazena instâncias do Chart.js para destruição/atualização
-        let currentTab = 'geral'; // Aba inicial
-        let viewSubcategorias = false; // Controle de drill-down do gráfico Operacional
+        let globalAtendimentos = []; 
+        let chartInstances = {}; 
+        let currentTab = 'geral'; 
+        let viewSubcategorias = false; 
         let mostrarNumeros = false;
 
-        // Registra o plugin de DataLabels e configura o layout
         Chart.register(ChartDataLabels);
         Chart.defaults.set('plugins.datalabels', {
             color: '#475569',
@@ -303,50 +276,95 @@
             }
         });
 
+        // =========================================================================
+        // 🟢 EXPLICAÇÃO DA MUDANÇA JS 2: INICIALIZAÇÃO INTELIGENTE (AUTOMÁTICA)
+        // Este bloco roda assim que a tela abre. Ele verifica a chave acima e
+        // decide se esconde o botão de CSV para chamar o servidor do Google.
+        // =========================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            if (USAR_GOOGLE_SHEETS) {
+                // Esconde a interface de CSV do topo
+                const uploadContainer = document.getElementById('upload-container');
+                if (uploadContainer) uploadContainer.style.display = 'none';
+                
+                // Pega os elementos da tela vazia para trocar a mensagem
+                const iconeVazio = document.getElementById('empty-state-icon');
+                const tituloVazio = document.getElementById('empty-state-title');
+                const descVazio = document.getElementById('empty-state-desc');
+                
+                // Coloca o ícone de carregando
+                iconeVazio.innerHTML = '<svg class="animate-spin h-16 w-16 text-blue-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+                tituloVazio.innerText = "Conectando ao Google Sheets...";
+                descVazio.innerText = "Buscando e processando registros da aba ativa.";
+
+                // Trava de Segurança: Se tentou usar a nuvem mas não tá dentro do Google Sheets
+                if (typeof google === 'undefined' || typeof google.script === 'undefined') {
+                    iconeVazio.innerHTML = '<svg class="w-16 h-16 text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>';
+                    tituloVazio.innerText = "Erro de Ambiente";
+                    descVazio.innerHTML = "O modo nuvem está ativado, mas você abriu o arquivo offline.<br>Mude a variável <b>USAR_GOOGLE_SHEETS</b> para <i>false</i> para usar CSV.";
+                    tituloVazio.classList.add('text-red-600');
+                    return;
+                }
+
+                // Dispara o comando para puxar os dados do arquivo do Apps Script (Código.gs)
+                google.script.run
+                    .withSuccessHandler(function(dadosRetornados) {
+                        // Se a planilha estiver vazia, avisa na tela
+                        if (!dadosRetornados || dadosRetornados.length === 0) {
+                            iconeVazio.innerHTML = '<svg class="w-16 h-16 text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>';
+                            tituloVazio.innerText = "Aba Vazia";
+                            descVazio.innerText = "Aba atual da planilha não possui dados tabulares ou está vazia.";
+                            return;
+                        }
+                        // Se os dados chegaram bem, envia para a mesma função que processa o CSV
+                        processarDadosBrutos(dadosRetornados);
+                    })
+                    .withFailureHandler(function(erro) {
+                        iconeVazio.innerHTML = '<svg class="w-16 h-16 text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+                        tituloVazio.innerText = "Falha na Leitura";
+                        descVazio.innerText = "O Google Script retornou um erro: " + erro.message;
+                        tituloVazio.classList.add('text-red-600');
+                    })
+                    .obterDadosPlanilha();
+            }
+        });
+
         /**
          * 3. ELEMENTOS DO DOM (Filtros e Botões)
          */
-        // Upload e Telas
         const fileInput = document.getElementById('csv-upload');
         const fileNameDisplay = document.getElementById('file-name');
         const dashboard = document.getElementById('dashboard-content');
         const emptyState = document.getElementById('empty-state');
         
-        // Filtros Globais
         const fGlobalAno = document.getElementById('filter-ano');
         const fGlobalMes = document.getElementById('filter-mes');
         const fGlobalMuni = document.getElementById('filter-municipio');
         
-        // Filtros Locais
         const fOpConclusao = document.getElementById('op-conclusao');
         const fPerfServico = document.getElementById('perf-servico');
         const fPerfTipo = document.getElementById('perf-tipo');
         const fPerfConclusao = document.getElementById('perf-conclusao');
         const fPerfGenero = document.getElementById('perf-genero');
 
-        // Event Listeners: Dropdown de Configurações do CSV
         const btnUploadConfig = document.getElementById('btn-upload-config');
         const dropdownConfig = document.getElementById('dropdown-config');
 
         btnUploadConfig.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evita que o clique feche o menu imediatamente
+            e.stopPropagation();
             dropdownConfig.classList.toggle('hidden');
         });
 
-        // Fecha o dropdown se o usuário clicar em qualquer outro lugar da tela
         document.addEventListener('click', (e) => {
             if (!dropdownConfig.contains(e.target) && !btnUploadConfig.contains(e.target)) {
                 dropdownConfig.classList.add('hidden');
             }
         });
 
-        // NOVO: Event Listener do botão de Mostrar/Ocultar Números
+        // Event Listener do botão de Mostrar/Ocultar Números
         const btnToggleLabels = document.getElementById('btn-toggle-labels');
-        
         btnToggleLabels.addEventListener('click', () => {
             mostrarNumeros = !mostrarNumeros;
-            
-            // Alterna a cor do ícone para dar feedback visual de "ativo" (amarelo) ou "inativo" (azul)
             if (mostrarNumeros) {
                 btnToggleLabels.classList.replace('text-blue-200', 'text-yellow-300');
                 btnToggleLabels.classList.replace('hover:text-white', 'hover:text-yellow-100');
@@ -354,12 +372,9 @@
                 btnToggleLabels.classList.replace('text-yellow-300', 'text-blue-200');
                 btnToggleLabels.classList.replace('hover:text-yellow-100', 'hover:text-white');
             }
-            
-            // Manda todos os gráficos se atualizarem para mostrar ou esconder os rótulos
             Object.values(chartInstances).forEach(chart => chart.update('none'));
         });
         
-        // Event Listeners dos Filtros
         document.querySelectorAll('.global-filter, .local-filter-op, .local-filter-perf').forEach(el => {
             el.addEventListener('change', renderizarDashboard);
         });
@@ -369,7 +384,6 @@
             renderizarDashboard();
         });
 
-        // Event Listener: Toggle Subcategorias (Aba Operacional)
         const btnToggleCat = document.getElementById('btn-toggle-cat');
         btnToggleCat.addEventListener('click', () => {
             viewSubcategorias = !viewSubcategorias;
@@ -378,17 +392,14 @@
             renderizarDashboard();
         });
 
-        // Event Listener: Upload do CSV
+        // Event Listener: Upload do CSV (Só funciona no modo Offline)
         fileInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
             if (!file) return;
             fileNameDisplay.textContent = file.name;
             fileNameDisplay.classList.remove('hidden');
 
-            // Verifica qual delimitador foi escolhido
             const delimiterChoice = document.getElementById('csv-delimiter').value;
-            
-            // Monta a configuração do PapaParse
             const parseConfig = {
                 header: true,
                 skipEmptyLines: true,
@@ -396,11 +407,7 @@
                 error: (err) => alert("Erro ao processar o CSV. Verifique o formato do arquivo.")
             };
 
-            // Se o usuário não deixou no "auto", forçamos o delimitador escolhido
-            if (delimiterChoice !== "auto") {
-                parseConfig.delimiter = delimiterChoice;
-            }
-
+            if (delimiterChoice !== "auto") parseConfig.delimiter = delimiterChoice;
             Papa.parse(file, parseConfig);
         });
 
@@ -409,29 +416,20 @@
          */
         function switchTab(tabId) {
             currentTab = tabId;
-            // Esconde todos os conteúdos
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            
-            // Remove o estilo ativo de TODAS as abas e devolve o estilo inativo
             document.querySelectorAll('.tab-btn').forEach(el => {
                 el.classList.remove('active-tab', 'border-blue-800', 'text-blue-900', 'bg-blue-50', 'font-semibold');
                 el.classList.add('border-transparent', 'text-slate-500', 'font-medium');
             });
-            
-            // Revela a aba clicada
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-            
-            // Aplica o novo estilo corporativo à aba clicada
             const activeBtn = document.getElementById(`nav-${tabId}`);
             activeBtn.classList.remove('border-transparent', 'text-slate-500', 'font-medium');
             activeBtn.classList.add('active-tab', 'border-blue-800', 'text-blue-900', 'bg-blue-50', 'font-semibold');
-
-            // Renderiza apenas os dados da aba atual
             renderizarDashboard();
         }
 
         /**
-         * 5. PIPELINE DE DADOS (ETL: Extract, Transform, Load)
+         * 5. PIPELINE DE DADOS (ETL)
          */
         function processarDadosBrutos(rawData) {
             globalAtendimentos = [];
@@ -439,7 +437,6 @@
             let municipiosEncontrados = new Set();
 
             rawData.forEach((row, index) => {
-                // 5.1 Buscas dinâmicas de colunas (Garante que mudanças de 1 letra no Forms não quebrem o código)
                 const dateKey = Object.keys(row).find(k => k.toLowerCase().includes('data de atendimento') || k.toLowerCase().includes('carimbo'));
                 const folhasKey = Object.keys(row).find(k => k.toLowerCase().includes('folhas'));
                 const tipoKey = Object.keys(row).find(k => k.toLowerCase().includes('tipo de atendimento') && !k.toLowerCase().includes('usuário'));
@@ -453,41 +450,35 @@
                 const rawDate = (row[dateKey] || "").trim();
                 if (!rawDate) return; 
 
-                // 5.2 Extração Temporal
                 const dateParsed = extractDateString(rawDate);
                 const anoExtraido = extrairAno(dateParsed);
                 const mesExtraido = extrairMes(dateParsed);
                 if (anoExtraido !== "Indefinido") anosEncontrados.add(anoExtraido);
 
-                // 5.3 Extração Geográfica e Demográfica
                 const municipioExtraido = normalizarStr(row[municipioKey]);
                 if (municipioExtraido) municipiosEncontrados.add(municipioExtraido);
                 
                 const idadeExtraida = parseInt((row[idadeKey] || "0").replace(/\D/g, ''));
                 const faixaEtaria = categorizarIdade(idadeExtraida, row[idadeKey]);
 
-                // 5.4 Lógica de Folhas (Extrai o maior número digitado na célula para evitar distorção)
                 const folhasStr = row[folhasKey] || "0";
                 const numerosEncontrados = folhasStr.match(/\d+/g); 
                 const numFolhas = numerosEncontrados ? Math.max(...numerosEncontrados.map(Number)) : 0;
 
-                // 5.5 Separação de Múltiplos Serviços por Pessoa
                 const tiposAtendimentoStr = (row[tipoKey] || "").trim();
                 const outroAtendimentoStr = (row[outroKey] || "").trim();
                 const combinedTypes = [tiposAtendimentoStr, outroAtendimentoStr].filter(t => t !== "").join(",");
                 
                 let fragmentos = combinedTypes.split(",").map(t => t.trim()).filter(t => {
                     const tNorm = t.toUpperCase();
-                    // Ignora as strings vazias ou a palavra "Outro" que o Google Forms gera
                     return tNorm !== "" && tNorm !== "OUTRO:" && tNorm !== "OUTRO" && tNorm !== "OUTROS";
                 });
 
-                if (fragmentos.length === 0) fragmentos = ["Outros"]; // Fallback de segurança
+                if (fragmentos.length === 0) fragmentos = ["Outros"]; 
 
-                // 5.6 Salva no Array Global (Duplica a pessoa se ela fez + de 1 serviço, mas amarra no mesmo ID)
                 fragmentos.forEach(atendimento => {
                     globalAtendimentos.push({
-                        idLinha: index, // ID único da pessoa (linha do CSV)
+                        idLinha: index,
                         dataStr: dateParsed,
                         ano: anoExtraido,
                         mes: mesExtraido,
@@ -499,36 +490,44 @@
                         subcategoria: padronizarOutros(atendimento),
                         sexo: normalizarStr(row[sexoKey]),
                         conclusivo: normalizarStr(row[conclusivoKey]),
-                        folhas: numFolhas // Alocado no objeto para filtrar dinamicamente
+                        folhas: numFolhas
                     });
                 });
             });
 
-            // 5.7 Preenche Dropdowns Dinâmicos
             popularDropdown(fGlobalAno, Array.from(anosEncontrados).sort((a, b) => b - a)); 
             popularDropdown(fGlobalMuni, Array.from(municipiosEncontrados).sort());
-            
-            // Popula filtro local de categorias na Aba Perfil
             popularDropdown(fPerfServico, Object.keys(categoriasDicionario));
 
-            // Revela Dashboard e Filtros do Topo
             emptyState.style.display = 'none';
             dashboard.style.display = 'block';
             document.getElementById('global-filters-container').classList.remove('hidden');
-            document.getElementById('global-filters-container').classList.add('flex'); // Ativa o layout flex
-            btnToggleLabels.classList.remove('hidden'); // MOSTRA O BOTÃO DE NÚMEROS
+            document.getElementById('global-filters-container').classList.add('flex');
+            
+            // Revela o botão auxiliar de números sempre
+            btnToggleLabels.classList.remove('hidden'); 
+            
+            // =========================================================================
+            // 🟢 EXPLICAÇÃO DA MUDANÇA JS 3: RESGATE DO BOTÃO NA NUVEM
+            // Se o modo Nuvem estiver ativo, a caixa onde o botão do olho ficava foi
+            // ocultada no carregamento. Aqui nós criamos uma nova caixa dinamicamente
+            // e colamos o botão de olho de volta no cabeçalho.
+            // =========================================================================
+            if (USAR_GOOGLE_SHEETS) {
+                const painelDireito = document.createElement('div');
+                painelDireito.className = "flex items-center space-x-2";
+                painelDireito.appendChild(btnToggleLabels);
+                document.querySelector('header .container').appendChild(painelDireito);
+            }
             
             renderizarDashboard();
         }
 
         /**
          * 6. MOTOR DE RENDERIZAÇÃO E FILTRAGEM
-         * Orquestra qual aba está aberta e aplica os filtros correspondentes
          */
         function renderizarDashboard() {
-            // Aplica as cores nos filtros selecionados
             atualizarEstilosFiltros(); 
-
             const vAno = fGlobalAno.value;
             const vMes = fGlobalMes.value;
             const vMuni = fGlobalMuni.value;
@@ -539,13 +538,9 @@
                        (vMuni === "ALL" || d.municipio === vMuni);
             });
 
-            if (currentTab === 'geral') {
-                renderizarAbaGeral(baseGlobalFiltrada, vAno, vMes);
-            } else if (currentTab === 'operacional') {
-                renderizarAbaOperacional(baseGlobalFiltrada);
-            } else if (currentTab === 'perfil') {
-                renderizarAbaPerfil(baseGlobalFiltrada);
-            }
+            if (currentTab === 'geral') renderizarAbaGeral(baseGlobalFiltrada, vAno, vMes);
+            else if (currentTab === 'operacional') renderizarAbaOperacional(baseGlobalFiltrada);
+            else if (currentTab === 'perfil') renderizarAbaPerfil(baseGlobalFiltrada);
         }
 
         /** ================= ABA 1: GERAL ================= */
@@ -584,36 +579,28 @@
             });
             const valores = labels.map(l => contagemData[l].size);
 
-            // Trava de Gráfico Vazio
             const temEvolucao = valores.length > 0;
             toggleEmptyState('chartEvolucao', temEvolucao);
-            if (temEvolucao) {
-                criarGrafico('chartEvolucao', 'line', labels, valores, 'Pessoas Atendidas por Dia', '#0284c7', true);
-            }
+            if (temEvolucao) criarGrafico('chartEvolucao', 'line', labels, valores, 'Pessoas Atendidas por Dia', '#0284c7', true);
         }
 
-        // Função de Apoio para Crescimento Temporal
         function calcularEExibirCrescimento(vAno, vMes, atualPessoas, atualMEIs, atualFolhas) {
             const elPessoas = document.getElementById('kpi-total-growth');
             const elMEIs = document.getElementById('kpi-mei-growth');
             const elFolhas = document.getElementById('kpi-folhas-growth');
             
-            // Se "Todos os Anos" estiver marcado, apaga as métricas (não se aplica)
             if (vAno === "ALL") {
                 [elPessoas, elMEIs, elFolhas].forEach(el => el.innerHTML = "");
                 return;
             }
 
-            // Descobre qual é o período passado e define o texto de contexto explicativo
             let filtroAnoPassado, filtroMesPassado, textoContexto;
             
             if (vMes === "ALL") {
-                // Year-over-Year (Compara Ano fechado com Ano Anterior)
                 filtroAnoPassado = (parseInt(vAno) - 1).toString();
                 filtroMesPassado = "ALL";
                 textoContexto = "vs. ano anterior";
             } else {
-                // Month-over-Month (Compara com Mês Anterior)
                 let prevMes = parseInt(vMes) - 1;
                 let prevAno = parseInt(vAno);
                 if (prevMes === 0) { prevMes = 12; prevAno -= 1; }
@@ -622,10 +609,8 @@
                 textoContexto = "vs. mês anterior";
             }
 
-            // Filtra base total para o período passado (Ignora o município atual para a linha de base)
             const basePassada = globalAtendimentos.filter(d => d.ano === filtroAnoPassado && (filtroMesPassado === "ALL" || d.mes === filtroMesPassado) && (fGlobalMuni.value === "ALL" || d.municipio === fGlobalMuni.value));
             
-            // Calcula KPIs passados
             const countUnique = (arr) => new Set(arr.map(d => d.idLinha)).size;
             const passadoPessoas = countUnique(basePassada);
             const passadoMEIs = countUnique(basePassada.filter(d => d.categoria === 'Abertura de MEI' || d.categoria === 'DASN MEI'));
@@ -634,17 +619,12 @@
             const lPassadas = new Set();
             basePassada.forEach(d => { if (!lPassadas.has(d.idLinha)) { lPassadas.add(d.idLinha); passadoFolhas += d.folhas; } });
 
-            // Formata HTML com Setas e insere a string de Contexto ("vs. mês anterior" etc)
             const formatHTML = (atual, passado) => {
                 const spanContexto = `<span class="text-slate-400 text-[10px] ml-1 font-normal tracking-wide">${textoContexto}</span>`;
-                
                 if (passado === 0) return `<span class="text-slate-400 font-normal ml-2">S/ Base Comparativa</span>`;
-                
                 const percent = (((atual - passado) / passado) * 100).toFixed(1);
-                
                 if (percent > 0) return `<span class="text-emerald-500 font-bold ml-2">↑ ${percent}%</span> ${spanContexto}`;
                 if (percent < 0) return `<span class="text-red-500 font-bold ml-2">↓ ${Math.abs(percent)}%</span> ${spanContexto}`;
-                
                 return `<span class="text-slate-500 font-bold ml-2">— 0%</span> ${spanContexto}`;
             };
 
@@ -681,7 +661,6 @@
                 });
                 
                 const sortedOutros = Object.entries(contagemOutros).sort((a, b) => b[1] - a[1]);
-                
                 const topN = 10;
                 let topSubs = sortedOutros.slice(0, topN);
                 let demaisCount = sortedOutros.slice(topN).reduce((acc, curr) => acc + curr[1], 0);
@@ -712,9 +691,7 @@
 
             const idadesUnicas = {};
             dadosLocais.forEach(d => {
-                if (d.idadeNumero > 0 && !idadesUnicas[d.idLinha]) {
-                    idadesUnicas[d.idLinha] = d.idadeNumero;
-                }
+                if (d.idadeNumero > 0 && !idadesUnicas[d.idLinha]) idadesUnicas[d.idLinha] = d.idadeNumero;
             });
             const arrayIdades = Object.values(idadesUnicas);
             const mediaIdade = arrayIdades.length > 0 
@@ -722,13 +699,10 @@
                 : 0;
             document.getElementById('kpi-media-idade').innerText = mediaIdade;
 
-            // 1. Gráfico Gênero (Pie)
             let masc = 0, fem = 0;
             const generoPorPessoa = {};
             dadosLocais.forEach(d => {
-                if (!generoPorPessoa[d.idLinha]) {
-                    generoPorPessoa[d.idLinha] = d.sexo;
-                }
+                if (!generoPorPessoa[d.idLinha]) generoPorPessoa[d.idLinha] = d.sexo;
             });
             Object.values(generoPorPessoa).forEach(sexo => {
                 if(sexo.includes('MASCULINO')) masc++;
@@ -739,7 +713,6 @@
             toggleEmptyState('chartGenero', temGenero);
             if (temGenero) criarGraficoPizza('chartGenero', ['Masculino', 'Feminino'], [masc, fem], ['#2563eb', '#0ea5e9']);
 
-            // 2. Gráfico Idade (Bar)
             const mapIdade = {"Até 25":0, "26 a 40":0, "41 a 60":0, "Acima de 60":0, "Não Informado":0};
             const idadePorPessoa = {}; 
             dadosLocais.forEach(d => {
@@ -751,7 +724,6 @@
             toggleEmptyState('chartIdade', temIdade);
             if (temIdade) criarGrafico('chartIdade', 'bar', Object.keys(mapIdade), Object.values(mapIdade), 'Pessoas', '#0d9488', false);
 
-            // 3. Gráfico Município (Horizontal Bar)
             const muniComIds = {};
             dadosLocais.forEach(d => {
                 if (!d.municipio) return;
@@ -773,24 +745,15 @@
         /**
          * 7. UTILITÁRIOS (Helpers de Gráficos e Limpeza)
          */
-
         function atualizarEstilosFiltros() {
-            // Pinta de índigo suave destacando os filtros que estão sendo usados
             document.querySelectorAll('.global-filter, .local-filter-op, .local-filter-perf').forEach(el => {
                 if (el.value !== "ALL") {
-                    // Adiciona o tema Índigo ativo
                     el.classList.add('bg-indigo-100', 'border-indigo-400', 'text-indigo-900', 'font-semibold');
-                    // Remove as cores padrão
                     el.classList.remove('bg-blue-900', 'border-blue-700', 'text-white', 'bg-white', 'border-slate-300');
                 } else {
-                    // Remove o tema Índigo ativo
                     el.classList.remove('bg-indigo-100', 'border-indigo-400', 'text-indigo-900', 'font-semibold');
-                    // Devolve as cores padrão dependendo de onde o filtro está
-                    if (el.classList.contains('global-filter')) {
-                        el.classList.add('bg-blue-900', 'border-blue-700', 'text-white');
-                    } else {
-                        el.classList.add('bg-white', 'border-slate-300');
-                    }
+                    if (el.classList.contains('global-filter')) el.classList.add('bg-blue-900', 'border-blue-700', 'text-white');
+                    else el.classList.add('bg-white', 'border-slate-300');
                 }
             });
         }
@@ -809,7 +772,7 @@
                 emptyDiv.classList.remove('hidden');
                 emptyDiv.classList.add('flex');
                 if(chartInstances[canvasId]) {
-                    chartInstances[canvasId].destroy(); // Destrói para evitar bugs visuais
+                    chartInstances[canvasId].destroy();
                     delete chartInstances[canvasId];
                 }
             }
@@ -822,7 +785,7 @@
             chartInstances[canvasId] = new Chart(ctx, {
                 type: type,
                 data: {
-                    labels: labels, // Guarda os textos COMPLETOS na memória
+                    labels: labels,
                     datasets: [{
                         label: dataLabel,
                         data: data,
@@ -835,31 +798,17 @@
                     }]
                 },
                 options: {
-                    animation: false, // <-- Mantendo a animação desligada para o download
+                    animation: false,
                     indexAxis: indexAxis, 
                     responsive: true, 
                     maintainAspectRatio: false,
-                    
-                    // 1. Cria um espaço invisível no topo e na direita do quadro
-                    layout: {
-                        padding: { top: 20, right: 35 } 
-                    },
-                    
+                    layout: { padding: { top: 20, right: 35 } },
                     plugins: { 
                         legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                title: function(context) { return context[0].label; }
-                            }
-                        }
+                        tooltip: { callbacks: { title: function(context) { return context[0].label; } } }
                     },
                     scales: { 
-                        // 2. Estica a régua do gráfico em 10% além da maior barra
-                        [indexAxis === 'x' ? 'y' : 'x']: { 
-                            beginAtZero: true, 
-                            grace: '10%', 
-                            ticks: { precision: 0 } 
-                        },
+                        [indexAxis === 'x' ? 'y' : 'x']: { beginAtZero: true, grace: '10%', ticks: { precision: 0 } },
                         [indexAxis === 'x' ? 'x' : 'y']: { 
                             ticks: {
                                 callback: function(value) {
@@ -884,19 +833,16 @@
                     datasets: [{ data: data, backgroundColor: colors, borderWidth: 0 }]
                 },
                 options: { 
-                    animation: false, // Mantém desligado para o download
+                    animation: false,
                     responsive: true, 
                     maintainAspectRatio: false, 
-                    cutout: '60%', // Diminuí um pouco o buraco do meio para caber números maiores
-                    layout: { 
-                        padding: 20 // Dá um "respiro" em volta da pizza inteira
-                    },
+                    cutout: '60%',
+                    layout: { padding: 20 },
                     plugins: { 
                         legend: { position: 'bottom' },
-                        // REGRA ESPECÍFICA SÓ PARA A PIZZA:
                         datalabels: {
-                            color: '#ffffff', // Número em branco para dar contraste
-                            anchor: 'center', // Puxa o número para DENTRO da fatia
+                            color: '#ffffff',
+                            anchor: 'center',
                             align: 'center',
                             font: { weight: 'bold', size: 14 }
                         }
@@ -905,7 +851,6 @@
             });
         }
 
-        // Funções de Sanitização de Strings
         function categorizar(texto) {
             const txt = normalizarStr(texto);
             if (!txt) return "Outros";
@@ -947,7 +892,6 @@
                     selectElement.appendChild(opt);
                 }
             });
-            // Mantém "Outros" sempre no final se for um dropdown de categoria
             if(arrayValores.includes("Outros")) {
                 const opt = document.createElement('option');
                 opt.value = "Outros"; opt.textContent = "Outros";
@@ -957,70 +901,22 @@
 
         function padronizarOutros(texto) {
             if (!texto) return "NÃO ESPECIFICADO";
-            
-            // 1. Limpeza Bruta: Maiúsculas, sem espaços extras nas pontas
             let t = texto.toUpperCase().trim();
-            // Remove acentos (ex: COMPENSAÇÃO vira COMPENSACAO)
             t = t.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
-
-            // 2. Filtro de Lixo: Pega ".", "-", "NADA" ou pessoas que digitaram só números (ex: "2023")
-            if (t === "." || t === "-" || t === "NADA" || /^[\d\s]+$/.test(t)) {
-                return "NÃO ESPECIFICADO";
-            }
-
-            // 3. Mapeamento Inteligente por Palavras-Chave (A Ordem Importa!)
-            
-            // Contas GOV e Acesso
-            if (t.includes('GOV') || t.includes('OURO') || t.includes('PRATA') || t.includes('BRONZE')) {
-                return 'CONTA GOV.BR (CRIAÇÃO/NÍVEIS)';
-            }
-            if (t.includes('SENHA') || t.includes('ACESSO') || t.includes('ECAC')) {
-                return 'RECUPERAÇÃO DE SENHA / ACESSO';
-            }
-
-            // Imposto de Renda e Malha Fina
-            if (t.includes('RETIFICADORA')) {
-                return 'DECLARAÇÃO RETIFICADORA (IRPF)';
-            }
-            if (t.includes('RESTITUI') || t.includes('PERDCOMP')) {
-                return 'RESTITUIÇÃO / PERDCOMP';
-            }
-            if (t.includes('MALHA') || t.includes('PENDENCIA') || t.includes('REGULARIZA')) {
-                return 'MALHA FINA / REGULARIZAÇÃO';
-            }
-            if (t.includes('IRPF') || t.includes('IMPOSTO DE RENDA') || t.includes('IR ') || t.includes('IRRF')) {
-                return 'IMPOSTO DE RENDA (DÚVIDAS/DECLARAÇÃO)';
-            }
-
-            // Guias e Multas
-            if (t.includes('DARF') || t.includes('GUIA') || t.includes('SICALC')) {
-                return 'EMISSÃO DE DARF / GUIA';
-            }
-            if (t.includes('COMPENSA') || t.includes('MULTA')) {
-                return 'COMPENSAÇÃO / MULTAS';
-            }
-
-            // Parcelamentos
-            if (t.includes('PARCELAMENTO') || t.includes('PARCELA')) {
-                return 'PARCELAMENTO DE DÉBITOS';
-            }
-
-            // Serviços Diversos
-            if (t.includes('INSS') || t.includes('PREVIDENCIA')) {
-                return 'SERVIÇOS INSS';
-            }
-            if (t.includes('MEI') || t.includes('DASN')) {
-                return 'SERVIÇOS MEI (GERAL)';
-            }
-            if (t.includes('CNPJ') || t.includes('BAIXA') || t.includes('ALTERACAO')) {
-                return 'CNPJ (BAIXA/ALTERAÇÃO)';
-            }
-
-            // 4. Fallback de Segurança
-            // Se o usuário digitou algo não mapeado, o código apenas 
-            // arranca preposições inúteis e agrupa o que sobrar.
+            if (t === "." || t === "-" || t === "NADA" || /^[\d\s]+$/.test(t)) return "NÃO ESPECIFICADO";
+            if (t.includes('GOV') || t.includes('OURO') || t.includes('PRATA') || t.includes('BRONZE')) return 'CONTA GOV.BR (CRIAÇÃO/NÍVEIS)';
+            if (t.includes('SENHA') || t.includes('ACESSO') || t.includes('ECAC')) return 'RECUPERAÇÃO DE SENHA / ACESSO';
+            if (t.includes('RETIFICADORA')) return 'DECLARAÇÃO RETIFICADORA (IRPF)';
+            if (t.includes('RESTITUI') || t.includes('PERDCOMP')) return 'RESTITUIÇÃO / PERDCOMP';
+            if (t.includes('MALHA') || t.includes('PENDENCIA') || t.includes('REGULARIZA')) return 'MALHA FINA / REGULARIZAÇÃO';
+            if (t.includes('IRPF') || t.includes('IMPOSTO DE RENDA') || t.includes('IR ') || t.includes('IRRF')) return 'IMPOSTO DE RENDA (DÚVIDAS/DECLARAÇÃO)';
+            if (t.includes('DARF') || t.includes('GUIA') || t.includes('SICALC')) return 'EMISSÃO DE DARF / GUIA';
+            if (t.includes('COMPENSA') || t.includes('MULTA')) return 'COMPENSAÇÃO / MULTAS';
+            if (t.includes('PARCELAMENTO') || t.includes('PARCELA')) return 'PARCELAMENTO DE DÉBITOS';
+            if (t.includes('INSS') || t.includes('PREVIDENCIA')) return 'SERVIÇOS INSS';
+            if (t.includes('MEI') || t.includes('DASN')) return 'SERVIÇOS MEI (GERAL)';
+            if (t.includes('CNPJ') || t.includes('BAIXA') || t.includes('ALTERACAO')) return 'CNPJ (BAIXA/ALTERAÇÃO)';
             t = t.replace(/\b(NO|NA|DO|DA|DE|O|A|E|PARA|COM|SOBRE)\b/g, ' ').replace(/\s+/g, ' ').trim();
-            
             return t === "" ? "NÃO ESPECIFICADO" : t;
         }
     </script>
