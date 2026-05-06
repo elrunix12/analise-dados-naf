@@ -74,15 +74,22 @@ function obterDadosPlanilha() {
 
   const headers = data[0];
   const rows = data.slice(1);
-
-  // Mapeia as linhas transformando em Objetos (JSON)
-  return rows.map(row => {
-    let obj = {};
-    headers.forEach((header, index) => {
-      obj[header] = row[index];
-    });
-    return obj;
+  
+  let jsonData = [];
+  
+  rows.forEach(row => {
+    // 🟢 CORREÇÃO: Transforma a linha inteira em um texto único. 
+    // Se o texto for vazio (sem respostas), ignora a linha e não envia para o painel.
+    if (row.join("").trim() !== "") {
+      let obj = {};
+      headers.forEach((header, index) => {
+        obj[header] = row[index];
+      });
+      jsonData.push(obj);
+    }
   });
+
+  return jsonData;
 }
 ```
 </details>

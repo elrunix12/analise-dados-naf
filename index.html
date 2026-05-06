@@ -17,7 +17,7 @@
             
             <div class="flex-shrink-0 text-center lg:text-left">
                 <h1 class="text-xl font-bold">Dashboard Analítico NAF</h1>
-                <p class="text-xs text-blue-200">Processamento Local • LGPD</p>
+                <p class="text-xs text-blue-200">Processamento Local • V0.30</p>
             </div>
 
             <div id="global-filters-container" class="hidden flex-grow justify-center items-center">
@@ -402,9 +402,9 @@
             const delimiterChoice = document.getElementById('csv-delimiter').value;
             const parseConfig = {
                 header: true,
-                skipEmptyLines: true,
+                skipEmptyLines: 'greedy', // 🟢 CORREÇÃO: Arranca linhas em branco agressivamente
                 complete: (results) => processarDadosBrutos(results.data),
-                error: (err) => alert("Erro ao processar o CSV. Verifique o formato do arquivo.")
+                error: (err) => alert("Erro ao processar o CSV.")
             };
 
             if (delimiterChoice !== "auto") parseConfig.delimiter = delimiterChoice;
@@ -432,23 +432,48 @@
          * 5. PIPELINE DE DADOS (ETL)
          */
         function processarDadosBrutos(rawData) {
+            // =========================================================================
+            // 🟢 TRAVA DE SEGURANÇA (DELIMITADOR DO GOOGLE)
+            // Se o arquivo usar vírgula e o sistema falhar em separar as colunas, 
+            // ele aborta o processo e avisa o usuário em vez de bugar o painel.
+            // =========================================================================
+            if (rawData.length > 0 && Object.keys(rawData[0]).length <= 3) {
+                alert("As colunas do arquivo não puderam ser lidas automaticamente.\n\nPor favor, clique na engrenagem ao lado de 'Carregar', mude o 'Formato do CSV' para Vírgula (,) e carregue o arquivo novamente.");
+                document.getElementById('empty-state').style.display = 'flex';
+                document.getElementById('dashboard-content').style.display = 'none';
+                return;
+            }
+
             globalAtendimentos = [];
             let anosEncontrados = new Set(); 
             let municipiosEncontrados = new Set();
 
             rawData.forEach((row, index) => {
-                const dateKey = Object.keys(row).find(k => k.toLowerCase().includes('data de atendimento') || k.toLowerCase().includes('carimbo'));
-                const folhasKey = Object.keys(row).find(k => k.toLowerCase().includes('folhas'));
-                const tipoKey = Object.keys(row).find(k => k.toLowerCase().includes('tipo de atendimento') && !k.toLowerCase().includes('usuário'));
-                const outroKey = Object.keys(row).find(k => k.toLowerCase().includes('respondeu outro'));
-                const sexoKey = Object.keys(row).find(k => k.toLowerCase() === 'sexo' || k.toLowerCase().includes('sexo'));
-                const conclusivoKey = Object.keys(row).find(k => k.toLowerCase().includes('conclusivo'));
-                const municipioKey = Object.keys(row).find(k => k.toLowerCase().includes('município'));
-                const tipoUserKey = Object.keys(row).find(k => k.toLowerCase().includes('tipo de usuário'));
-                const idadeKey = Object.keys(row).find(k => k.toLowerCase() === 'idade');
+                // O "k &&" previne erros caso alguma coluna do arquivo venha sem título
+                const dateKey = Object.keys(row).find(k => k && (k.toLowerCase().includes('data de atendimento') || k.toLowerCase().includes('carimbo')));
+                if (!dateKey) return; 
 
                 const rawDate = (row[dateKey] || "").trim();
-                if (!rawDate) return; 
+                
+                // =========================================================================
+                // 🟢 FILTRO ANTI-CABEÇALHO
+                // Aborta e ignora esta linha imediatamente se:
+                // 1. A célula estiver vazia.
+                // 2. Não tiver nenhum número (!/\d/) provando que não é uma data real.
+                // 3. Tiver a palavra 'carimbo' escrita nela (ou seja, é o cabeçalho perdido).
+                // =========================================================================
+                if (!rawDate || !/\d/.test(rawDate) || rawDate.toLowerCase().includes('carimbo')) {
+                    return; 
+                }
+
+                const folhasKey = Object.keys(row).find(k => k && k.toLowerCase().includes('folhas'));
+                const tipoKey = Object.keys(row).find(k => k && k.toLowerCase().includes('tipo de atendimento') && !k.toLowerCase().includes('usuário'));
+                const outroKey = Object.keys(row).find(k => k && k.toLowerCase().includes('respondeu outro'));
+                const sexoKey = Object.keys(row).find(k => k && (k.toLowerCase() === 'sexo' || k.toLowerCase().includes('sexo')));
+                const conclusivoKey = Object.keys(row).find(k => k && k.toLowerCase().includes('conclusivo'));
+                const municipioKey = Object.keys(row).find(k => k && k.toLowerCase().includes('município'));
+                const tipoUserKey = Object.keys(row).find(k => k && k.toLowerCase().includes('tipo de usuário'));
+                const idadeKey = Object.keys(row).find(k => k && k.toLowerCase() === 'idade');
 
                 const dateParsed = extractDateString(rawDate);
                 const anoExtraido = extrairAno(dateParsed);
@@ -504,15 +529,8 @@
             document.getElementById('global-filters-container').classList.remove('hidden');
             document.getElementById('global-filters-container').classList.add('flex');
             
-            // Revela o botão auxiliar de números sempre
             btnToggleLabels.classList.remove('hidden'); 
             
-            // =========================================================================
-            // 🟢 EXPLICAÇÃO DA MUDANÇA JS 3: RESGATE DO BOTÃO NA NUVEM
-            // Se o modo Nuvem estiver ativo, a caixa onde o botão do olho ficava foi
-            // ocultada no carregamento. Aqui nós criamos uma nova caixa dinamicamente
-            // e colamos o botão de olho de volta no cabeçalho.
-            // =========================================================================
             if (USAR_GOOGLE_SHEETS) {
                 const painelDireito = document.createElement('div');
                 painelDireito.className = "flex items-center space-x-2";
