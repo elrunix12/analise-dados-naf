@@ -437,18 +437,36 @@
             let municipiosEncontrados = new Set();
 
             rawData.forEach((row, index) => {
-                const dateKey = Object.keys(row).find(k => k.toLowerCase().includes('data de atendimento') || k.toLowerCase().includes('carimbo'));
-                const folhasKey = Object.keys(row).find(k => k.toLowerCase().includes('folhas'));
-                const tipoKey = Object.keys(row).find(k => k.toLowerCase().includes('tipo de atendimento') && !k.toLowerCase().includes('usuário'));
-                const outroKey = Object.keys(row).find(k => k.toLowerCase().includes('respondeu outro'));
-                const sexoKey = Object.keys(row).find(k => k.toLowerCase() === 'sexo' || k.toLowerCase().includes('sexo'));
-                const conclusivoKey = Object.keys(row).find(k => k.toLowerCase().includes('conclusivo'));
-                const municipioKey = Object.keys(row).find(k => k.toLowerCase().includes('município'));
-                const tipoUserKey = Object.keys(row).find(k => k.toLowerCase().includes('tipo de usuário'));
-                const idadeKey = Object.keys(row).find(k => k.toLowerCase() === 'idade');
+                // Adicionado um "k &&" para evitar erros se a coluna vier sem nome
+                const dateKey = Object.keys(row).find(k => k && (k.toLowerCase().includes('data de atendimento') || k.toLowerCase().includes('carimbo')));
+                
+                // =========================================================================
+                // 🟢 CORREÇÃO: Evita erro crítico se a planilha não tiver a coluna de data
+                // =========================================================================
+                if (!dateKey) return;
 
                 const rawDate = (row[dateKey] || "").trim();
-                if (!rawDate) return; 
+                
+                // =========================================================================
+                // 🟢 CORREÇÃO: Bloqueia Cabeçalhos e Linhas Vazias
+                // O código agora obriga que a célula da data:
+                // 1. Não seja vazia
+                // 2. Tenha pelo menos um número (/\d/.test) para provar que é uma data
+                // 3. Não contenha a palavra "carimbo" ou "data" (impedindo contar o cabeçalho)
+                // =========================================================================
+                if (!rawDate || !/\d/.test(rawDate) || rawDate.toLowerCase().includes('carimbo') || rawDate.toLowerCase().includes('data')) {
+                    return; // Pula esta linha e vai para a próxima (não contabiliza)
+                }
+
+                // Restante das chaves (adicionado "k &&" em todas por segurança)
+                const folhasKey = Object.keys(row).find(k => k && k.toLowerCase().includes('folhas'));
+                const tipoKey = Object.keys(row).find(k => k && k.toLowerCase().includes('tipo de atendimento') && !k.toLowerCase().includes('usuário'));
+                const outroKey = Object.keys(row).find(k => k && k.toLowerCase().includes('respondeu outro'));
+                const sexoKey = Object.keys(row).find(k => k && (k.toLowerCase() === 'sexo' || k.toLowerCase().includes('sexo')));
+                const conclusivoKey = Object.keys(row).find(k => k && k.toLowerCase().includes('conclusivo'));
+                const municipioKey = Object.keys(row).find(k => k && k.toLowerCase().includes('município'));
+                const tipoUserKey = Object.keys(row).find(k => k && k.toLowerCase().includes('tipo de usuário'));
+                const idadeKey = Object.keys(row).find(k => k && k.toLowerCase() === 'idade');
 
                 const dateParsed = extractDateString(rawDate);
                 const anoExtraido = extrairAno(dateParsed);
@@ -504,15 +522,8 @@
             document.getElementById('global-filters-container').classList.remove('hidden');
             document.getElementById('global-filters-container').classList.add('flex');
             
-            // Revela o botão auxiliar de números sempre
             btnToggleLabels.classList.remove('hidden'); 
             
-            // =========================================================================
-            // 🟢 EXPLICAÇÃO DA MUDANÇA JS 3: RESGATE DO BOTÃO NA NUVEM
-            // Se o modo Nuvem estiver ativo, a caixa onde o botão do olho ficava foi
-            // ocultada no carregamento. Aqui nós criamos uma nova caixa dinamicamente
-            // e colamos o botão de olho de volta no cabeçalho.
-            // =========================================================================
             if (USAR_GOOGLE_SHEETS) {
                 const painelDireito = document.createElement('div');
                 painelDireito.className = "flex items-center space-x-2";
